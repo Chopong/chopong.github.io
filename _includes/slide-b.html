@@ -1,0 +1,23 @@
+<section markdown="1" data-background="{{ page.img }}"><section markdown="1">
+    {% if page.title %}
+## {{ page.title }}
+    {% endif %}
+    {% if page.subtitle %}
+### {{ page.subtitle }}
+    {% endif %}
+
+<hr>
+
+
+
+    {% if page.author %}
+#### {{ page.author }}
+    {% endif %}
+
+    {% if page.date %}
+#### {{ page.date | date: "%I %M %p ,%a, %b %d %Y"}}
+    {% endif %}
+
+</section></section>
+<section markdown="1" data-background="{{ page.img }}"><section markdown="1">
+<!-- Start Writing Below in Markdown -->

@@ -1,0 +1,9 @@
+main:
+  - title: "Me"
+    url: /sundry/me/
+  - title: "Talks"
+    url: /sundry/talks/
+  - title: "homepage"
+    url: /sundry/homepage/
+#  - title: "archive"
+#    url: 

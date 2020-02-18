@@ -1,0 +1,67 @@
+I"�<h1 id="table-of-contents">Table of Contents</h1>
+<ul id="markdown-toc">
+  <li><a href="#table-of-contents" id="markdown-toc-table-of-contents">Table of Contents</a></li>
+  <li><a href="#n卡驱动" id="markdown-toc-n卡驱动">N卡驱动</a>    <ul>
+      <li><a href="#1-更新源" id="markdown-toc-1-更新源">1. 更新源</a></li>
+      <li><a href="#2-升级" id="markdown-toc-2-升级">2. 升级</a></li>
+      <li><a href="#3-安装header" id="markdown-toc-3-安装header">3. 安装header</a></li>
+      <li><a href="#4-安装显卡驱动" id="markdown-toc-4-安装显卡驱动">4. 安装显卡驱动</a></li>
+      <li><a href="#5-修改配置" id="markdown-toc-5-修改配置">5. 修改配置</a></li>
+      <li><a href="#6-更新开机启动项" id="markdown-toc-6-更新开机启动项">6. 更新开机启动项</a></li>
+      <li><a href="#7-安装n卡驱动" id="markdown-toc-7-安装n卡驱动">7. 安装N卡驱动</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="n卡驱动">N卡驱动</h1>
+<blockquote>
+  <p>说明: 我只在家里的 Kali 上安装过, 本子上是A卡, 没有试验.</p>
+</blockquote>
+
+<h3 id="1-更新源">1. 更新源</h3>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nb">sudo </span>apt update
+</code></pre></div></div>
+
+<h3 id="2-升级">2. 升级</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    apt-get dist-upgrade
+</code></pre></div></div>
+<p>during the process: press [Q], Yes, Yes, Press [Enter], 重启.</p>
+
+<h3 id="3-安装header">3. 安装header</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    apt <span class="nb">install </span>linux-headers-<span class="si">$(</span><span class="nb">uname</span> <span class="nt">-r</span><span class="si">)</span>
+    reboot
+</code></pre></div></div>
+
+<h3 id="4-安装显卡驱动">4. 安装显卡驱动</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    apt <span class="nb">install </span>nvidia-driver nvidia-xconfig
+</code></pre></div></div>
+
+<h3 id="5-修改配置">5. 修改配置</h3>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nb">sudo </span>vi /etc/modprobe.d/nvidia-blacklists-nouveau.conf
+</code></pre></div></div>
+
+<p>delete all and type:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    blacklist nouveau
+    blacklist lbm-nouveau
+    options nouveau <span class="nv">modeset</span><span class="o">=</span>0
+    <span class="nb">alias </span>nouveau off
+    <span class="nb">alias </span>lbm-nouveau off
+</code></pre></div></div>
+
+<h3 id="6-更新开机启动项">6. 更新开机启动项</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    update-initramfs <span class="nt">-u</span>
+    reboot
+</code></pre></div></div>
+
+<h3 id="7-安装n卡驱动">7. 安装N卡驱动</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    apt-get <span class="nb">install </span>hashcat-nvidia
+    nvidia-smi
+    reboot
+</code></pre></div></div>
+:ET

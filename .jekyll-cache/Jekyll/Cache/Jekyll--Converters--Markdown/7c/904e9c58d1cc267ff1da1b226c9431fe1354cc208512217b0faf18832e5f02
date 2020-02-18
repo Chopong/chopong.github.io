@@ -1,0 +1,316 @@
+I"ZD<h1 id="table-of-contents">Table of Contents</h1>
+<ul id="markdown-toc">
+  <li><a href="#table-of-contents" id="markdown-toc-table-of-contents">Table of Contents</a></li>
+  <li><a href="#科学上网" id="markdown-toc-科学上网">科学上网</a></li>
+  <li><a href="#配置服务器" id="markdown-toc-配置服务器">配置服务器</a>    <ul>
+      <li><a href="#基于shadowsocks和ssh" id="markdown-toc-基于shadowsocks和ssh">基于Shadowsocks和ssh</a></li>
+      <li><a href="#一-部署服务器" id="markdown-toc-一-部署服务器">一. 部署服务器</a></li>
+      <li><a href="#二-服务器基础配置" id="markdown-toc-二-服务器基础配置">二. 服务器基础配置</a></li>
+      <li><a href="#三-shadowsocks服务端配置" id="markdown-toc-三-shadowsocks服务端配置">三. Shadowsocks服务端配置</a></li>
+      <li><a href="#四-shadowsocks服务端开机自启动可选" id="markdown-toc-四-shadowsocks服务端开机自启动可选">四. Shadowsocks服务端开机自启动(可选)</a></li>
+      <li><a href="#五-shadowsocks客户端配置" id="markdown-toc-五-shadowsocks客户端配置">五. Shadowsocks客户端配置</a></li>
+      <li><a href="#六-上网设置可选" id="markdown-toc-六-上网设置可选">六. 上网设置(可选)</a></li>
+      <li><a href="#七-其他资源" id="markdown-toc-七-其他资源">七. 其他资源</a></li>
+    </ul>
+  </li>
+</ul>
+<h1 id="科学上网">科学上网</h1>
+
+<h1 id="配置服务器">配置服务器</h1>
+
+<h4 id="基于shadowsocks和ssh">基于Shadowsocks和ssh</h4>
+
+<ul>
+  <li>服务器一般选择linux系统, 运行稳定, 还自带openssl, 因此只需要在部署之后, 安装Shadowsocks就可以, 下面介绍如何使用Shadowsocks进行搭建.</li>
+</ul>
+
+<h2 id="一-部署服务器">一. 部署服务器</h2>
+
+<ol>
+  <li>
+    <p>配置服务器一定得有一台虚拟的机器才行, 一般要求不高的话可以选择比较便宜的<a href="https://www.vultr.com/">Vultr</a>, 最少充值10$, 可以使用支付宝进行充值.</p>
+  </li>
+  <li>
+    <p>选择服务器位置. 不要觉得日本近而选择日本节点, 因为它并不一定是最快的服务器, 通过点击下载测试网速文件进行选择最快的节点. <a href="https://www.vultr.com/faq/">点击测试</a></p>
+  </li>
+  <li>
+    <p>测试节点网速, 选快的(废话). 这里需要注意的是, 位于不同国家或城市的服务器的套餐价位是可变的, 一般价格为5 $/mon, 或者是按小时收费, 只要服务器搭建好了, 就会持续收费, 除非你摧毁掉它.</p>
+  </li>
+  <li>
+    <p>还有一些城市有2.5 $/mon的套餐, 但是只支持ipv6, 对于国内一般家庭网络(ipv4)可能不支持. 这里我选择纽约.</p>
+  </li>
+  <li>
+    <p>服务器的系统选择Ubuntu18.4, 点击部署就可以了, 等待几分钟, 服务器就搭建好了, 记住IP和密码下面要用到.</p>
+  </li>
+</ol>
+
+<h2 id="二-服务器基础配置">二. 服务器基础配置</h2>
+
+<ol>
+  <li>
+    <p>服务器部署结束之后, 使用终端(linux)或者ssh客户端putty(Windows, Mac)来登录并控制服务器.</p>
+  </li>
+  <li>
+    <p>使用命令登录. <code class="highlighter-rouge">ssh root@服务器IP</code>, 输入上面的登录密码后, 就可以登录了</p>
+  </li>
+  <li>
+    <p>首先, 更新源</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     apt-get update <span class="o">&amp;&amp;</span> upgrade
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>安装python组件</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     apt-get <span class="nb">install </span>python-pip python-gevent python-m2crypto
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>更新pip库</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     pip <span class="nb">install</span> <span class="nt">--upgrade</span> setuptools
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>安装shadowsocks, 出现Successful installed shadowsocks-xxx就说明成功了.</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     pip <span class="nb">install </span>shadowsocks
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="三-shadowsocks服务端配置">三. Shadowsocks服务端配置</h2>
+
+<ol>
+  <li>
+    <p>新建文件夹, 使用vim编辑器编辑配置文件.</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     <span class="nb">mkdir</span> <span class="nt">-p</span> /etc/shadowsocks
+     vim /etc/shadowsocks/config.json
+</code></pre></div>    </div>
+
+    <ul>
+      <li>vim编辑器使用说明:</li>
+    </ul>
+  </li>
+</ol>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">按键</th>
+      <th style="text-align: left">功能</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">i</td>
+      <td style="text-align: left">进入编辑模式</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">ESC</td>
+      <td style="text-align: left">退出编辑模式</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">:w Enter</td>
+      <td style="text-align: left">保存文件</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">:q Enter</td>
+      <td style="text-align: left">退出</td>
+    </tr>
+  </tbody>
+</table>
+
+<ol>
+  <li>
+    <p>config.json内容如下</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     <span class="p">{</span>
+         <span class="dl">"</span><span class="s2">server</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">0.0.0.0</span><span class="dl">"</span><span class="p">,</span>
+         <span class="dl">"</span><span class="s2">server_port</span><span class="dl">"</span><span class="p">:</span><span class="mi">8838</span><span class="p">,</span>
+         <span class="dl">"</span><span class="s2">password</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">your password</span><span class="dl">"</span><span class="p">,</span>
+         <span class="dl">"</span><span class="s2">time_out</span><span class="dl">"</span><span class="p">:</span><span class="mi">600</span><span class="p">,</span>
+         <span class="dl">"</span><span class="s2">method</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">aes-256-cfb</span><span class="dl">"</span><span class="p">,</span>
+         <span class="dl">"</span><span class="s2">fast_open</span><span class="dl">"</span><span class="p">:</span><span class="kc">false</span>
+     <span class="p">}</span>
+</code></pre></div>    </div>
+    <ul>
+      <li>简单说明:
+        <ul>
+          <li>server: Vultr服务器的IP地址</li>
+          <li>server_port: 端口数, 可以自己写</li>
+          <li>password: 登录密码, 与Vultr提供的不一样, 自己定义</li>
+          <li>time_out: 超时</li>
+          <li>method: 加密方式</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>如果需要开启多个端口, 可以使用以下内容</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     <span class="p">{</span>
+         <span class="dl">"</span><span class="s2">server</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">0.0.0.0</span><span class="dl">"</span><span class="p">,</span>
+         <span class="dl">"</span><span class="s2">port_password</span><span class="dl">"</span><span class="p">:{</span>
+             <span class="dl">"</span><span class="s2">8888</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">yourpassword</span><span class="dl">"</span><span class="p">,</span>
+             <span class="dl">"</span><span class="s2">8838</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">yourpassword</span><span class="dl">"</span>
+             <span class="p">},</span>
+         <span class="dl">"</span><span class="s2">time_out</span><span class="dl">"</span><span class="p">:</span><span class="mi">600</span><span class="p">,</span>
+         <span class="dl">"</span><span class="s2">method</span><span class="dl">"</span><span class="p">:</span><span class="dl">"</span><span class="s2">aes-256-cfb</span><span class="dl">"</span><span class="p">,</span>
+         <span class="dl">"</span><span class="s2">fast_open</span><span class="dl">"</span><span class="p">:</span><span class="kc">false</span>
+     <span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>由于部分openssl升级到了1.1.0版本, 所以启动时可能会报undefined symbol错误, 下面解决这个错误. 如果没有报错, 那么可以直接跳过这一部分.</p>
+
+    <ul>
+      <li>打开openssl.py</li>
+    </ul>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     vim /usr/local/lib/python2.7/dist-packages/shadowsocks/cropto/openssl.py
+</code></pre></div>    </div>
+
+    <ul>
+      <li>将文本中52行和111行的cleanup替换为reset, 即:</li>
+    </ul>
+
+    <p><code class="highlighter-rouge">libcrypto.EVP_CIPHER_CTX_cleanup</code> –&gt;
+ <code class="highlighter-rouge">libcrypto.EVP_CIPHER_CTX_reset</code></p>
+  </li>
+  <li>
+    <p>启动shadowsocks服务.</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     ssserver <span class="nt">-c</span> /etc/shadowsocks/config.json <span class="nt">-d</span> start
+</code></pre></div>    </div>
+    <p>以上就把服务端配置好了, 第4步开机自启可以跳过. 但如果你服务器经常需要重启, 继续第4步.</p>
+  </li>
+</ol>
+
+<h2 id="四-shadowsocks服务端开机自启动可选">四. Shadowsocks服务端开机自启动(可选)</h2>
+
+<ol>
+  <li>
+    <p>创建shadowsocks.service文件</p>
+
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     vim /etc/systemd/system/shadowsocks.service
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>文件内容如下</p>
+
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     <span class="p">[</span><span class="nx">Unit</span><span class="p">]</span>
+     <span class="nx">Description</span><span class="o">=</span><span class="nx">Shadowsocks</span>
+     <span class="nx">After</span><span class="o">=</span><span class="nx">network</span><span class="p">.</span><span class="nx">target</span>
+
+     <span class="p">[</span><span class="nx">Service</span><span class="p">]</span>
+     <span class="nx">Type</span><span class="o">=</span><span class="nx">forking</span>
+     <span class="nx">PIDFile</span><span class="o">=</span><span class="sr">/run/</span><span class="nx">shadowsocks</span><span class="o">/</span><span class="nx">server</span><span class="p">.</span><span class="nx">pid</span>
+     <span class="nx">PermissionsStartOnly</span><span class="o">=</span><span class="kc">true</span>
+     <span class="nx">ExecStartPre</span><span class="o">=</span><span class="sr">/bin/m</span><span class="nx">kdir</span> <span class="o">-</span><span class="nx">p</span> <span class="o">/</span><span class="nx">run</span><span class="o">/</span><span class="nx">shadowsocks</span>
+     <span class="nx">ExecStartPre</span><span class="o">=</span><span class="sr">/bin/</span><span class="nx">chown</span> <span class="nx">root</span><span class="p">:</span><span class="nx">root</span> <span class="o">/</span><span class="nx">run</span><span class="o">/</span><span class="nx">shadowsocks</span>
+     <span class="nx">ExecStart</span><span class="o">=</span><span class="sr">/usr/</span><span class="nx">local</span><span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">ssserver</span> <span class="o">--</span><span class="nx">pid</span><span class="o">-</span><span class="nx">file</span> <span class="o">/</span><span class="kd">var</span><span class="sr">/run/</span><span class="nx">shadowsocks</span><span class="o">/</span><span class="nx">server</span><span class="p">.</span><span class="nx">pid</span> <span class="o">-</span><span class="nx">c</span> <span class="o">/</span><span class="nx">etc</span><span class="o">/</span><span class="nx">shadowsocks</span><span class="o">/</span><span class="nx">config</span><span class="p">.</span><span class="nx">json</span> <span class="o">-</span><span class="nx">d</span> <span class="nx">start</span>
+     <span class="nx">Restart</span><span class="o">=</span><span class="nx">on</span><span class="o">-</span><span class="nx">abort</span>
+     <span class="nx">User</span><span class="o">=</span><span class="nx">root</span>
+     <span class="nx">Group</span><span class="o">=</span><span class="nx">root</span>
+     <span class="nx">UMask</span><span class="o">=</span><span class="mi">0027</span>
+
+     <span class="p">[</span><span class="nx">Install</span><span class="p">]</span>
+     <span class="nx">WantedBy</span><span class="o">=</span><span class="nx">multi</span><span class="o">-</span><span class="nx">user</span><span class="p">.</span><span class="nx">target</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>更改文件权限</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     <span class="nb">chmod </span>755 /etc/systemd/system/shadowsocks.service
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>启动服务</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    systemctl start shadowsocks
+    systemctl <span class="nb">enable </span>shadowsocks
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="五-shadowsocks客户端配置">五. Shadowsocks客户端配置</h2>
+
+<p>不同操作系统使用Shadowsocks的方式大同小异, 下载安装shadowsocks客户端, 资源见下:</p>
+
+<ol>
+  <li>Linux, Windows, Mac:
+    <ul>
+      <li>添加新配置, 填写服务器IP地址, 自己上面设置的端口和对应的自己设置的密码, 本地IP和端口保持默认(一般为127.0.0.1:1080).</li>
+      <li>测试节点延迟, 并进行连接, 打开系统代理或全局代理即可.</li>
+      <li>(可选) Linux系统有应用代理, 可以单独设置代理上网的应用.</li>
+    </ul>
+  </li>
+  <li>Android:
+    <ul>
+      <li>配置同上, 一般没有设置本地IP和端口的选项.</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="六-上网设置可选">六. 上网设置(可选)</h2>
+
+<ul>
+  <li>
+    <p>按照上述连接后, 上网请求全部经服务器连接, 此时打开国内的资源会很慢, 此时可以通过浏览器插件来实现分流. Chrome/Chromium/FireFox等推荐使用SwitchOmega, 具体使用方法可以百度.</p>
+  </li>
+  <li>
+    <p>打开自动切换(AutoSwitch), 默认直接连接. 当不能连接时, 点击图标选择代理方式, 即可轻松实现上网操作.</p>
+  </li>
+</ul>
+
+<h2 id="七-其他资源">七. 其他资源</h2>
+<ol>
+  <li>Putty 下载地址：
+    <ul>
+      <li>Windows:
+        <ul>
+          <li><a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html">https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html</a></li>
+        </ul>
+      </li>
+      <li>Mac:
+        <ul>
+          <li><a href="https://putty-for-mac.soft32.com/">https://putty-for-mac.soft32.com/</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Shadowsocks客户端 下载地址:
+    <ul>
+      <li>Windows:
+        <ul>
+          <li><a href="https://github.com/shadowsocks/shadowsocks-windows/releases">https://github.com/shadowsocks/shadowsocks-windows/releases</a></li>
+        </ul>
+      </li>
+      <li>Mac OS X:
+        <ul>
+          <li><a href="https://github.com/shadowsocks/ShadowsocksX-NG/releases">https://github.com/shadowsocks/ShadowsocksX-NG/releases</a></li>
+        </ul>
+      </li>
+      <li>linux:
+        <ul>
+          <li><a href="https://github.com/shadowsocks/shadowsocks-qt5/wiki/Installation">https://github.com/shadowsocks/shadowsocks-qt5/wiki/Installation</a></li>
+          <li><a href="https://github.com/shadowsocks/shadowsocks-qt5/releases/">https://github.com/shadowsocks/shadowsocks-qt5/releases/</a></li>
+        </ul>
+      </li>
+      <li>iOS:
+        <ul>
+          <li><a href="https://itunes.apple.com/app/apple-store/id1070901416?pt=2305194&amp;ct=shadowsocks.org&amp;mt=8">https://itunes.apple.com/app/apple-store/id1070901416?pt=2305194&amp;ct=shadowsocks.org&amp;mt=8</a></li>
+          <li><a href="https://github.com/shadowsocks/shadowsocks-iOS/releases">https://github.com/shadowsocks/shadowsocks-iOS/releases</a></li>
+        </ul>
+      </li>
+      <li>Android:
+        <ul>
+          <li><a href="https://play.google.com/store/apps/details?id=com.github.shadowsocks">https://play.google.com/store/apps/details?id=com.github.shadowsocks</a></li>
+          <li><a href="https://github.com/shadowsocks/shadowsocks-android/releases">https://github.com/shadowsocks/shadowsocks-android/releases</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ol>
+:ET

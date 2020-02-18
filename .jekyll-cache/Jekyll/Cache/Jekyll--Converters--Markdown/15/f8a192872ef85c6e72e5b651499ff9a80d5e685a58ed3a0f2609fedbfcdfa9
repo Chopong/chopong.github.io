@@ -1,0 +1,97 @@
+I"{<h1 id="table-of-contents">Table of Contents</h1>
+<ul id="markdown-toc">
+  <li><a href="#table-of-contents" id="markdown-toc-table-of-contents">Table of Contents</a></li>
+  <li><a href="#liunx-下安装并破解sublime-text-3" id="markdown-toc-liunx-下安装并破解sublime-text-3">Liunx 下安装并破解sublime text 3</a>    <ul>
+      <li><a href="#1-下载解压安装包" id="markdown-toc-1-下载解压安装包">1. 下载解压安装包</a></li>
+      <li><a href="#2-修改图标文件" id="markdown-toc-2-修改图标文件">2. 修改图标文件</a></li>
+      <li><a href="#3-修改执行文件" id="markdown-toc-3-修改执行文件">3. 修改执行文件</a></li>
+      <li><a href="#4-注册码" id="markdown-toc-4-注册码">4. 注册码</a></li>
+      <li><a href="#5-修改host文件" id="markdown-toc-5-修改host文件">5. 修改host文件</a></li>
+      <li><a href="#6-创建快捷方式" id="markdown-toc-6-创建快捷方式">6. 创建快捷方式</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="liunx-下安装并破解sublime-text-3">Liunx 下安装并破解sublime text 3</h1>
+
+<h2 id="1-下载解压安装包">1. 下载解压安装包</h2>
+
+<p>​	从官网上下载最新的安装包, 并解压</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">tar</span> <span class="nt">-xvvf</span> sublime_text_3_build_3207_x64.tar.bz2
+<span class="o">[</span><span class="nb">sudo</span><span class="o">]</span> <span class="nb">mv </span>sublime_text_3 /opt/
+</code></pre></div></div>
+
+<h2 id="2-修改图标文件">2. 修改图标文件</h2>
+
+<p>​	修改  <code class="highlighter-rouge">sublime_text.desktop</code></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span><span class="nb">sudo</span><span class="o">]</span> vim /opt/sublime_text_3/sublime_text.desktop
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	Exec=/opt/sublime_text_3/sublime_text %F
+	Icon=/opt/sublime_text_3/Icon/256x256/sublime-text.png
+</code></pre></div></div>
+
+<h2 id="3-修改执行文件">3. 修改执行文件</h2>
+
+<p>在终端编辑 sublime_text 执行文件</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vim sublime_text
+</code></pre></div></div>
+
+<p>将文件转成十六进制</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:%!xxd
+</code></pre></div></div>
+
+<p>然后查找 97 94 0D</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/9794
+</code></pre></div></div>
+
+<p>把9794 0D替换成0000 00</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:%!xxd -r
+</code></pre></div></div>
+
+<p>最后保存退出，然后就可以使用注册码了。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>:wq!
+</code></pre></div></div>
+
+<h2 id="4-注册码">4. 注册码</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    —– BEGIN LICENSE —–
+    TwitterInc
+    200 User License
+    EA7E-890007
+    1D77F72E 390CDD93 4DCBA022 FAF60790
+    61AA12C0 A37081C5 D0316412 4584D136
+    94D7F7D4 95BC8C1C 527DA828 560BB037
+    D1EDDD8C AE7B379F 50C9D69D B35179EF
+    2FE898C4 8E4277A8 555CE714 E1FB0E43
+    D5D52613 C3D12E98 BC49967F 7652EED2
+    9D2D2E61 67610860 6D338B72 5CF95C69
+    E36B85CC 84991F19 7575D828 470A92AB
+    —— END LICENSE ——
+</code></pre></div></div>
+
+<h2 id="5-修改host文件">5. 修改host文件</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	127.0.0.1 www.sublimetext.com
+	127.0.0.1 sublimetext.com
+	127.0.0.1 sublimehq.com
+	127.0.0.1 telemetry.sublimehq.com
+	127.0.0.1 license.sublimehq.com
+	127.0.0.1 45.55.255.55
+	127.0.0.1 45.55.41.223
+</code></pre></div></div>
+
+<h2 id="6-创建快捷方式">6. 创建快捷方式</h2>
+
+<p>如果你想在应用程序中能搜索到, 就把 sublime_text.desktop 复制到 /usr/share/applications 中</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span><span class="nb">sudo</span><span class="o">]</span> <span class="nb">cp</span> /opt/sublime_text_3/sublime_text.desktop /usr/share/applications
+</code></pre></div></div>
+:ET

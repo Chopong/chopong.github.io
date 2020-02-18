@@ -1,0 +1,147 @@
+---
+layout: page
+title: me
+---
+<hr>
+
+
+	{% if site.avatar %}
+	<img src="{{ site.url }}/{{ site.avatar | prepend: site.baseurl }}" style="margin-top:0px; margin-bottom:5px; margin-right:10px; float:left; width:150px !important">
+	{% endif %}
+	{% if site.title %}
+	<h1>{{ site.title }}
+		{% if site.name %}
+			{{ site.name }}
+		{% endif %}
+	</h1> {% endif %}
+
+	{% if site.status %}
+	<h2>{{ site.status }}</h2>
+	{% endif %}</br>
+
+	{% if site.bio %} 
+	{{ site.bio }}
+	{% endif %}
+
+
+ <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-0 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                    
+
+                    {% if site.twitter_username %}
+                    <li>
+                        <a href="https://twitter.com/{{ site.twitter_username }}">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    {% endif %}
+
+                    {% if site.facebook_username %}
+                    <li>
+                        <a href="https://www.facebook.com/{{ site.facebook_username }}">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    {% endif %}
+			
+                    {% if site.linkedin_username %}
+                    <li>
+                        <a href="https://www.linkedin.com/{{ site.linkedin_username }}">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    {% endif %}
+
+                    {% if site.email %}
+                    <li>
+                        <a href="https://gmail.com/{{ site.email }}">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    {% endif %}
+
+		    {% if site.wechat_QR %}
+                    <li>
+                        <a href="{{ site.url }}/{{ site.wechat_QR | prepend: site.baseurl }}">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-wechat fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    {% endif %}
+
+                    {% if site.qq_QR %}
+                    <li>
+                        <a href="{{ site.url }}/{{ site.qq_QR | prepend: site.baseurl }}">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-qq fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    {% endif %}
+  
+                    {% if site.zhihu_username %}
+                    <li>
+                        <a href="target="_blank" href="https://www.zhihu.com/people/"{{ site.zhihu_username }}">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                    {% endif %}
+  
+  
+                    {% if site.weibo_username %}
+                    <li>
+                        <a href="target="_blank" href="https://weibo.com/"{{ site.weibo_username }}">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    {% endif %}
+   
+                    {% if site.github_username %}
+                    <li>
+                        <a href="https://github.com/{{ site.github_username }}/{{ site.project_repository}}">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    {% endif %}	
+
+                    {% if site.rss %}
+                    <li>
+                        <a href="{{ site.url }}/sundry/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-feed fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    {% endif %}
+            </div>
+        </div>
+    </div>
+<hr>
