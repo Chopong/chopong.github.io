@@ -1,0 +1,51 @@
+# Site settings
+title: Chopong's Blog
+name: 维尔斯特拉斯
+email: weisp.pku@gmail.com
+description: "So we beat on, boats against the current, borne back ceaselessly into the past."
+header-img: img/home-bg.jpg
+logo: img/logos/GNU-icon.png
+avatar: img/article/demo.png
+comment: livere
+baidu-analytics: true
+url: "https://chopong.github.io"
+baseurl: ""
+bio: "东拼西凑搞了一个博客, 门外汉, 不懂html, 纯粹自己搞着玩! 
+之前装过debian系的几个系统, debian/ubuntu/kali, 后来在一次meta培训课上认识了一个首医的哥们儿, 他说Deepin做的还不错, 后来继续读书也没怎么在意这个东西, 再后来因为一些原因退学了, 现在重新搞一搞当时想搞但没搞成的事情."
+status: "中关村文理学院●情怀批发部 <br> 硕士退学生"
+
+# SNS settings
+wechat_username: WeiSP1997
+wechat_QR: img/article/demo.png
+qq_username: 842071968
+qq_QR: img/article/demo.png
+github_username:  Chopong
+weibo_username:  # Chopong
+zhihu_username: # Chopong
+twitter_username: # Chopong
+facebook_username: # Chopong
+linkedin_username: # Chopong
+rss: true
+
+# Build settings
+plugins: [jekyll-paginate, jekyll-sitemap, jekyll-seo-tag]
+markdown: kramdown
+kramdown:
+  input: GFM                    
+  syntax_highlighter_opts:
+    span:
+      line_numbers: false
+    block:
+      line_numbers: false
+      start_line: #1
+
+highlighter: rouge
+permalink: pretty
+paginate: 10
+exclude: ["node_modules","Gruntfile.js","package.json","README.md"]
+
+
+sidebar: true              
+sidebar-about-description: "艺术就是爆炸"
+sidebar-avatar: /img/article/demo.png
+
