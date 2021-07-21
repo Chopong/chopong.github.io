@@ -1,0 +1,168 @@
+I"�"<h1 id="table-of-contents">Table of Contents</h1>
+<ul id="markdown-toc">
+  <li><a href="#table-of-contents" id="markdown-toc-table-of-contents">Table of Contents</a></li>
+  <li><a href="#中文输入" id="markdown-toc-中文输入">中文输入</a>    <ul>
+      <li><a href="#1-linux下的中文输入" id="markdown-toc-1-linux下的中文输入">1. Linux下的中文输入</a>        <ul>
+          <li><a href="#1-linux下的输入法框架" id="markdown-toc-1-linux下的输入法框架">1). Linux下的输入法框架</a></li>
+          <li><a href="#2-linux中文输入法的安装" id="markdown-toc-2-linux中文输入法的安装">2). Linux中文输入法的安装</a></li>
+          <li><a href="#3-在菜单栏选择并配置输入法" id="markdown-toc-3-在菜单栏选择并配置输入法">3). 在菜单栏选择并配置输入法</a></li>
+          <li><a href="#4-gtk-query-immodules" id="markdown-toc-4-gtk-query-immodules">4). gtk-query-immodules</a></li>
+          <li><a href="#5-xim报错" id="markdown-toc-5-xim报错">5). XIM报错</a></li>
+        </ul>
+      </li>
+      <li><a href="#2-locale设置" id="markdown-toc-2-locale设置">2. Locale设置</a>        <ul>
+          <li><a href="#1-locale选项" id="markdown-toc-1-locale选项">1). locale选项</a></li>
+          <li><a href="#2-lang和language的区别" id="markdown-toc-2-lang和language的区别">2). LANG和LANGUAGE的区别</a></li>
+        </ul>
+      </li>
+      <li><a href="#3-参考资料" id="markdown-toc-3-参考资料">3. 参考资料</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="中文输入">中文输入</h1>
+
+<h2 id="1-linux下的中文输入">1. Linux下的中文输入</h2>
+
+<p>在英文版的Linux上, 或者安装时没有选择中文时, 开机以后是无法输入中文的, 需要安装中文输入法. 而在linux中, 不像Windows, 直接安装相关输入法就行了. 而是需要安装输入法框架, 然后再在此基础上进行安装中文输入.</p>
+
+<h3 id="1-linux下的输入法框架">1). Linux下的输入法框架</h3>
+<p>Linux下常见的输入法框架是ibus和fcitx, 安装其中一个就行.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nb">sudo </span>apt get <span class="nb">install </span>fcitx
+</code></pre></div></div>
+
+<h3 id="2-linux中文输入法的安装">2). Linux中文输入法的安装</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nb">sudo </span>apt <span class="nb">install </span>fcitx-sunpinyin fcitx-sougoupinyin
+</code></pre></div></div>
+
+<h3 id="3-在菜单栏选择并配置输入法">3). 在菜单栏选择并配置输入法</h3>
+<p>如果不能使用, 或者出现问题, 在终端输入<code class="language-plaintext highlighter-rouge">fcitx-diagnose</code>, 查看输出中是否有错误, 根据错误修改.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    fcitx-diagnose
+</code></pre></div></div>
+
+<h3 id="4-gtk-query-immodules">4). gtk-query-immodules</h3>
+
+<p>不知道从哪一版起, gtk-query-immodules的目录改到了以下位置, 在<code class="language-plaintext highlighter-rouge">/usr/bin/</code>中找不到可执行项, 所以fcitx可能会报错, 因此只需要在<code class="language-plaintext highlighter-rouge">/usr/bin</code>建立符号链接即可</p>
+<blockquote>
+  <p>gtk2: <code class="language-plaintext highlighter-rouge">/usr/lib/x86_64-linux-gnu/libgtk2.0-0/gtk-query-immodules-2.0</code>
+gtk3: <code class="language-plaintext highlighter-rouge">/usr/lib/x86_64-linux-gnu/libgtk-3-0/gtk-query-immodules-3.0</code></p>
+</blockquote>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nb">ln</span> <span class="nt">-s</span> /usr/lib/x86_64-linux-gnu/libgtk2.0-0/gtk-query-immodules-2.0 /usr/bin/gtk-query-immodules-2.0
+    <span class="nb">ln</span> <span class="nt">-s</span> /usr/lib/x86_64-linux-gnu/libgtk-3-0/gtk-query-immodules-3.0 /usr/bin/gtk-query-immodules-3.0
+</code></pre></div></div>
+
+<h3 id="5-xim报错">5). XIM报错</h3>
+
+<p>在<code class="language-plaintext highlighter-rouge">~/</code>(<code class="language-plaintext highlighter-rouge">/home/xxx/</code>)目录下找到<code class="language-plaintext highlighter-rouge">.xinitrc</code> 将以下内容填写到文尾.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nb">export </span><span class="nv">GTK_IM_MODULE</span><span class="o">=</span>fcitx
+    <span class="nb">export </span><span class="nv">QT_IM_MODULE</span><span class="o">=</span>fcitx
+    <span class="nb">export </span><span class="nv">XMODIFIERS</span><span class="o">=</span><span class="s2">"@im=fcitx"</span>
+</code></pre></div></div>
+
+<h2 id="2-locale设置">2. Locale设置</h2>
+
+<h3 id="1-locale选项">1). locale选项</h3>
+
+<p>有些时候, 在一些软件中并不能调出fcitx, 这是因为当前的locale设置并不是中文环境, 这时候需要配置locale文件, 一般系统读取顺序为: <code class="language-plaintext highlighter-rouge">/etc/enviroment</code> -&gt; <code class="language-plaintext highlighter-rouge">/etc/profile</code> -&gt; <code class="language-plaintext highlighter-rouge">~/.profile</code> -&gt; <code class="language-plaintext highlighter-rouge">~/.env</code> (如果存在)</p>
+
+<p>或者直接在<code class="language-plaintext highlighter-rouge">/etc/default/locale</code>更改, 其中的一些可选项如下:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>可选项</th>
+      <th>含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>LANG</td>
+      <td>locale的默认值, 优先级最低</td>
+    </tr>
+    <tr>
+      <td>LANGUAGE</td>
+      <td>程序界面的语言</td>
+    </tr>
+    <tr>
+      <td>LC_CTYPE</td>
+      <td>输入语言</td>
+    </tr>
+    <tr>
+      <td>LC_NUMERIC</td>
+      <td>数值显示方式</td>
+    </tr>
+    <tr>
+      <td>LC_TIME</td>
+      <td>时间显示方式</td>
+    </tr>
+    <tr>
+      <td>LC_COLLATE</td>
+      <td>归类类别</td>
+    </tr>
+    <tr>
+      <td>LC_MONETAR</td>
+      <td>货币显示方式</td>
+    </tr>
+    <tr>
+      <td>LC_MESSAGES</td>
+      <td>提示信息, 错误信息, 状态信息和菜单等</td>
+    </tr>
+    <tr>
+      <td>LC_NAME</td>
+      <td>姓名书写方式</td>
+    </tr>
+    <tr>
+      <td>LC_ADDRESS</td>
+      <td>地址书写方式</td>
+    </tr>
+    <tr>
+      <td>LC_TELEPHONE</td>
+      <td>电话号码书写方式</td>
+    </tr>
+    <tr>
+      <td>LC_MEASUREMENT</td>
+      <td>度量衡表达方式</td>
+    </tr>
+    <tr>
+      <td>LC_PAPER</td>
+      <td>默认纸张大小</td>
+    </tr>
+    <tr>
+      <td>LC_IDENTIFICATION</td>
+      <td>对locale自身包含信息的概述</td>
+    </tr>
+    <tr>
+      <td>LC_ALL</td>
+      <td>选择整个locale语言环境</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>如果想要一个纯中文系统的话, 设定<code class="language-plaintext highlighter-rouge">LC_ALL=zh_CN.UTF-8</code></li>
+  <li>如果只想要一个中文输入环境, 而保持菜单信息保持为英文, 只要设定<code class="language-plaintext highlighter-rouge">LC_CTYPE=zh_CN.Utf-8</code>, <code class="language-plaintext highlighter-rouge">LANG=en_US.UTF-8</code>就可以了</li>
+  <li>假如什么也不做的话, 就是默认<code class="language-plaintext highlighter-rouge">LC_ALL</code>, <code class="language-plaintext highlighter-rouge">LC_*</code>, <code class="language-plaintext highlighter-rouge">LANG</code>均不设定, 系统将采用<code class="language-plaintext highlighter-rouge">POSIX</code>作为locale, 也就是<code class="language-plaintext highlighter-rouge">C</code> locale.</li>
+</ul>
+
+<h3 id="2-lang和language的区别">2). LANG和LANGUAGE的区别</h3>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">LANG</code> 指定所有未设定locale的变量的默认值, 优先级很低</li>
+  <li><code class="language-plaintext highlighter-rouge">LANGUAGE</code> 多数应用程序使用此语言作为面板语言</li>
+  <li>优先级: <code class="language-plaintext highlighter-rouge">LC_ALL</code> &gt; <code class="language-plaintext highlighter-rouge">LC_*</code> &gt; <code class="language-plaintext highlighter-rouge">LANG</code></li>
+</ul>
+
+<h2 id="3-参考资料">3. 参考资料</h2>
+
+<ul>
+  <li><a href="https://zh.cppreference.com/w/c/locale/LC_categories">https://zh.cppreference.com/w/c/locale/LC_categories</a></li>
+  <li><a href="https://fcitx-im.org/wiki/Input_method_related_environment_variables/zh-hans">输入法相关变量</a></li>
+  <li><a href="https://www.cnblogs.com/zxc2man/p/4586136.html">ubuntu下中文输入法的配置，建议用fcitx</a></li>
+</ul>
+
+:ET
