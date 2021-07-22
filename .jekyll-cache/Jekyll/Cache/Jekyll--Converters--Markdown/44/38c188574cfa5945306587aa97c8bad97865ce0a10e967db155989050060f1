@@ -1,0 +1,114 @@
+I"�#<h1 id="table-of-contents">Table of Contents</h1>
+<ul id="markdown-toc">
+  <li><a href="#table-of-contents" id="markdown-toc-table-of-contents">Table of Contents</a></li>
+  <li><a href="#中文输入法词库" id="markdown-toc-中文输入法词库">中文输入法词库</a>    <ul>
+      <li><a href="#在linux系统环境下-使用fcitx框架下的输入法-进行安装词库-优化输入体验" id="markdown-toc-在linux系统环境下-使用fcitx框架下的输入法-进行安装词库-优化输入体验">在Linux系统环境下, 使用fcitx框架下的输入法, 进行安装词库, 优化输入体验</a></li>
+      <li><a href="#背景" id="markdown-toc-背景">背景</a></li>
+      <li><a href="#具体方法" id="markdown-toc-具体方法">具体方法</a>        <ul>
+          <li><a href="#1-sunpinyin--userdict" id="markdown-toc-1-sunpinyin--userdict">1. sunpinyin + userdict</a></li>
+          <li><a href="#2-pinyin--下载词库" id="markdown-toc-2-pinyin--下载词库">2. pinyin + 下载词库</a></li>
+          <li><a href="#3-pinyin--自定义词库" id="markdown-toc-3-pinyin--自定义词库">3. pinyin + 自定义词库</a></li>
+          <li><a href="#参考资料" id="markdown-toc-参考资料">参考资料</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+<h1 id="中文输入法词库">中文输入法词库</h1>
+
+<h2 id="在linux系统环境下-使用fcitx框架下的输入法-进行安装词库-优化输入体验">在Linux系统环境下, 使用fcitx框架下的输入法, 进行安装词库, 优化输入体验</h2>
+
+<h2 id="背景">背景</h2>
+
+<p>在Linux系统上进行中文输入不像在Windows那样简单, 之前已经推过一篇博文说明如何在Linux下进行 <a href="https://chopong.github.io/note/2019/04/22/%E4%B8%AD%E6%96%87%E8%BE%93%E5%85%A5/">中文输入</a>, 但是输入体验和Windows下的还是有差距.</p>
+
+<p>目前, <strong>搜狗输入法</strong> 和 <strong>Deepin</strong>合作已经开发了Linux版本, 有需要的朋友可以直接去搜狗官网进行下载. 但是对我来说, 每次重启后搜狗输入法总是改变我的输入法设置, 导致我的一些软件不能按我想的方式进行中文输入, 比如在emacs上输入会吃字, 即从英文切换到中文输入法时, 第一个字母仍然是英文字母, 每次都要删掉, 非常麻烦, 所以我就想怎么才能避免这个问题呢? 使用fcitx框架下的其他输入法, 配合搜狗输入法的词库, 无疑是最佳搭配, 所以才有这篇博文.</p>
+
+<p>在fcitx框架下, 很多输入法都可以搭配个人的词库, 本博文也时按照这个思路进行简单总结:</p>
+
+<ul>
+  <li>sunpinyin + userdict (优点: 最简单, 无须转换)</li>
+  <li>pinyin + 下载词库 (直接下载网上词库, 需要转换, 缺点: 体积大)</li>
+  <li>pinyin + 自定义词库 (从搜狗官网下载, 可自定义输入的词库, 需要两次转换)</li>
+</ul>
+
+<h2 id="具体方法">具体方法</h2>
+
+<h3 id="1-sunpinyin--userdict">1. sunpinyin + userdict</h3>
+
+<p>1). 下载sunpinyin-userdict.7z 完整版词库<a href="https://code.google.com/archive/p/hslinuxextra/downloads"><code class="language-plaintext highlighter-rouge">地址</code></a>;</p>
+
+<p>2). 解压后得到userdict文件, 将其移动到 <code class="language-plaintext highlighter-rouge">~/.sunpinyin/</code></p>
+
+<p>3). 覆盖原来的文件就行, 若看不见目录, C-h 即能看见.</p>
+
+<p>4). 注销重新登录.</p>
+
+<h3 id="2-pinyin--下载词库">2. pinyin + 下载词库</h3>
+
+<p>fcitx-pinyin 也可以安装词库, 不过不能直接使用, 需要进行转换, 按照之前的薄荷开源网的一篇<a href="http://www.mintos.org/skill/fcitx-sougou.html"><code class="language-plaintext highlighter-rouge">帖子</code></a>, fcitx-pinyin使用词库需要下载sg2fcitx转换工具<a href="http://code.google.com/p/sg2fcitx/downloads/list"><code class="language-plaintext highlighter-rouge">sg2fcitx</code></a>, 但实际上这里面的<code class="language-plaintext highlighter-rouge">createPYMB</code>已经集成到了<code class="language-plaintext highlighter-rouge">fcitx-tools</code>中, 可以直接使用安装包管理工具进行安装, 然后直接调用即可, 比如:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nb">sudo </span>apt <span class="nb">install </span>fcitx-tools
+</code></pre></div></div>
+
+<p>1). [二选一]下载/安装 转换工具</p>
+
+<ul>
+  <li><a href="http://code.google.com/p/sg2fcitx/downloads/list"><code class="language-plaintext highlighter-rouge">sg2fcitx</code></a></li>
+  <li>fcitx-tools</li>
+</ul>
+
+<p>2). 下载别人制作好的词库, 比如<a href="https://code.google.com/archive/p/hslinuxextra/downloads"><code class="language-plaintext highlighter-rouge">fcitx-sougou-phrase-full</code></a></p>
+
+<p>3). 使用<code class="language-plaintext highlighter-rouge">createPYMB</code>进行转换</p>
+
+<ul>
+  <li>使用<code class="language-plaintext highlighter-rouge">fcitx-tools</code>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nb">cd</span> ~/Downloads/fcitx-sougou-phrase-full
+  createPYMB gbkpy.org pyPhrase.org
+</code></pre></div>    </div>
+  </li>
+  <li>或者使用下载的文件<a href="http://code.google.com/p/sg2fcitx/downloads/list"><code class="language-plaintext highlighter-rouge">sg2fcitx</code></a>
+把解压后的<code class="language-plaintext highlighter-rouge">createPYMB</code>和<code class="language-plaintext highlighter-rouge">sg2fcitx</code>复制到刚才下载, 等待转换的词库文件夹<code class="language-plaintext highlighter-rouge">fcitx-sougou-phrase-full</code>中</li>
+</ul>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ./createPYMB gbkpy.org pyPhrase.org
+</code></pre></div></div>
+
+<p>4). 转换大概需要几分钟, 即可生成<code class="language-plaintext highlighter-rouge">pybase.mb</code>和<code class="language-plaintext highlighter-rouge">pyphrase.mb</code>两个词库文件, 加上<code class="language-plaintext highlighter-rouge">pyPhrase.org</code>, 把这三个文件都复制到 <code class="language-plaintext highlighter-rouge">/usr/share/fcitx/data</code>或者<code class="language-plaintext highlighter-rouge">/usr/share/fcitx/pinyin</code>下.</p>
+
+<p>5). 注销系统, 重新登录后即可使用.</p>
+
+<h3 id="3-pinyin--自定义词库">3. pinyin + 自定义词库</h3>
+
+<p>第二种方法实际上已经比较好用了, 但是别人的词库包太大, 好多词库自己根本用不到, 想自己定义词库怎么办呢? 下面介绍第三种方法, 从搜狗官网下载scel文件, 然后转换成org文件, 再按照方法2进行第二次转换即可.</p>
+
+<p>1). 从搜狗官网下载scel词库, 保存到默认位置<code class="language-plaintext highlighter-rouge">~/Downloads</code>(其他位置也行)</p>
+
+<p>2). 使用<code class="language-plaintext highlighter-rouge">scel2org</code>进行转换(<code class="language-plaintext highlighter-rouge">scel2org</code>已经集成在<code class="language-plaintext highlighter-rouge">fcitx-tools</code>里, 可以直接使用安装包管理工具进行安装).</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nb">mkdir</span> <span class="nt">-p</span> tmp <span class="o">&amp;&amp;</span> <span class="nb">cd </span>tmp <span class="o">&amp;&amp;</span> <span class="nb">mkdir</span> <span class="nt">-p</span> orgfile
+    <span class="nb">mv</span> ~/Downloads/<span class="k">*</span>.scel ./
+    <span class="k">for </span>dict <span class="k">in</span> <span class="k">*</span>.scel<span class="p">;</span> <span class="k">do </span>scel2org <span class="nv">$dict</span> <span class="nt">-o</span> orgfile/<span class="nv">$dict</span>.org    <span class="p">;</span> <span class="k">done
+    </span><span class="nb">cp</span> ../pyPhrase.org orgfile/
+    <span class="nb">cat</span> ../orgfile/<span class="k">*</span> | <span class="nb">sort</span> | <span class="nb">uniq</span> <span class="o">&gt;</span> dicts.org
+</code></pre></div></div>
+
+<p>3). 然后按照第二种方法进行二次转换.</p>
+
+<p>4). 如果你觉得麻烦, 直接fork这个仓库<a href="https://github.com/Chopong/fcitx-dict/tree/master">repo</a>, 然后使用下面的命令即可:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    bash convert.sh
+</code></pre></div></div>
+
+<h3 id="参考资料">参考资料</h3>
+
+<ul>
+  <li><a href="http://www.mintos.org/skill/fcitx-sougou.html">薄荷开源网</a></li>
+  <li><a href="https://code.google.com/archive/p/hslinuxextra/downloads">hslinuxextra</a></li>
+  <li><a href="http://code.google.com/p/sg2fcitx/downloads/list">sg2fcitx</a></li>
+  <li><a href="https://github.com/AlessandroChen/fcitx-pinyin-lexicon">fcitx-pinyin-lexicon</a></li>
+  <li><a href="https://pinyin.sogou.com/dict/">搜狗官网</a></li>
+</ul>
+
+:ET

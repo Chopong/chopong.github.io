@@ -1,0 +1,84 @@
+I"I<h1 id="table-of-contents">Table of Contents</h1>
+<ul id="markdown-toc">
+  <li><a href="#table-of-contents" id="markdown-toc-table-of-contents">Table of Contents</a></li>
+  <li><a href="#修复grub引导" id="markdown-toc-修复grub引导">修复Grub引导</a>    <ul>
+      <li><a href="#系统进不去" id="markdown-toc-系统进不去">系统进不去?</a></li>
+    </ul>
+  </li>
+</ul>
+<h1 id="修复grub引导">修复Grub引导</h1>
+
+<h3 id="系统进不去">系统进不去?</h3>
+
+<ol>
+  <li>
+    <p>使用命令行进入系统, 或者使用Live 系统进入, 打开终端, 挂载需要修复系统的 <code class="language-plaintext highlighter-rouge">/</code> 挂载到<code class="language-plaintext highlighter-rouge">/mnt</code>，可以利用Gparted或者 <code class="language-plaintext highlighter-rouge">sudo fdisk -l</code> 命令查看，例如需要修复系统的/分区为<code class="language-plaintext highlighter-rouge">/dev/sda1</code>。 执行以下命令：</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     <span class="nb">sudo </span>mount /dev/sda1 /mnt
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>如果需要修复系统的<code class="language-plaintext highlighter-rouge">/boot</code>单独分了出来（假设为<code class="language-plaintext highlighter-rouge">/dev/sda2</code>），也要挂上，终端执行：</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     <span class="nb">sudo </span>mount /dev/sda2 /mnt/boot
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>另外,将Live CD系统的<code class="language-plaintext highlighter-rouge">/dev</code>目录同时挂在<code class="language-plaintext highlighter-rouge">/mnt</code>下，终端执行：</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     <span class="nb">sudo </span>mount <span class="nt">--bind</span> /dev /mnt/dev
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>然后使用chroot命令，将Live CD的 <code class="language-plaintext highlighter-rouge">/</code> 设为以前的 <code class="language-plaintext highlighter-rouge">/</code>，终端执行：</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     <span class="nb">sudo </span>mount <span class="nt">--bind</span> /proc /mnt/proc
+     <span class="nb">sudo </span>mount <span class="nt">--bind</span> /sys /mnt/sys
+     <span class="nb">sudo chroot</span> /mnt
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>安装并刷新GRUB设置(主板为BIOS引导)，请终端执行：</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     grub-probe <span class="nt">-t</span> device /boot/grub
+     <span class="nb">sudo </span>grub-install /dev/sda
+     <span class="nb">sudo </span>grub-install <span class="nt">--recheck</span> /dev/sda
+     <span class="nb">sudo </span>update-grub
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>安装并刷新GRUB设置(主板为UEFI引导)： 启动root shell后，检查您的EFI系统分区（最可能 <code class="language-plaintext highlighter-rouge">/dev/sda1</code>）是否安装在 <code class="language-plaintext highlighter-rouge">/boot /efi</code> 上：</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     mount /dev/sda1 /boot/efi
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>重新安装 <code class="language-plaintext highlighter-rouge">grub-efi</code> 包：</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     apt-get <span class="nb">install</span> <span class="nt">--reinstall</span> grub-efi
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>将debian引导加载程序放在 <code class="language-plaintext highlighter-rouge">/boot/efi</code> 中，并在计算机NVRAM中创建一个适当的条目：</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     grub-install /dev/sda
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>重新创建一个基于磁盘分区模式的grub配置文件：</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     update-grub
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>挂载EFI分区到 <code class="language-plaintext highlighter-rouge">/boot/efi</code>，安装 <code class="language-plaintext highlighter-rouge">grub-efi</code> 包：</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    grub-install <span class="nt">--target</span><span class="o">=</span>x86_64-efi <span class="nt">--efi-directory</span><span class="o">=</span>/boot/efi <span class="nt">--bootloader-id</span><span class="o">=</span>Deepin
+    grub-mkconfig <span class="nt">-o</span> /boot/grub/grub.cfg
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>修复完成，重启电脑生效。</p>
+  </li>
+</ol>
+:ET

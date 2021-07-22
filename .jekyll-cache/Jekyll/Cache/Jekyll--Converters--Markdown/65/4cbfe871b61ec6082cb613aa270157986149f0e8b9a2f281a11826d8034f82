@@ -1,0 +1,77 @@
+I"�<h1 id="table-of-contents">Table of Contents</h1>
+<ul id="markdown-toc">
+  <li><a href="#table-of-contents" id="markdown-toc-table-of-contents">Table of Contents</a></li>
+  <li><a href="#win7图片浏览器" id="markdown-toc-win7图片浏览器">Win7图片浏览器</a>    <ul>
+      <li><a href="#背景" id="markdown-toc-背景">背景</a></li>
+      <li><a href="#原理" id="markdown-toc-原理">原理</a></li>
+      <li><a href="#第一步-新建一个注册表文件" id="markdown-toc-第一步-新建一个注册表文件">第一步: 新建一个注册表文件</a></li>
+      <li><a href="#第二步-双击文件运行" id="markdown-toc-第二步-双击文件运行">第二步: 双击文件运行</a></li>
+      <li><a href="#第三步-默认程序打开方式" id="markdown-toc-第三步-默认程序打开方式">第三步: 默认程序打开方式</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="win7图片浏览器">Win7图片浏览器</h1>
+
+<h2 id="背景">背景</h2>
+
+<p>如果你像我一样, 升级了 Windows 10, 却对其缓慢的图片浏览器打开速度难以忍受的话, 是不是很怀念 Windows 7的流畅的图片预览体验呢!继续读下去, 下面将介绍如何将这一体验延续至 Windows 10.</p>
+
+<h2 id="原理">原理</h2>
+
+<p>因为在 Windows 10 中, 照片查看器的DLL文件依然存在, 但是, 与之相关的注册信息被删除了. 我们要做的, 就是把注册信息重新注册到系统里, 告诉系统原来还有一个照片查看器可以用.</p>
+
+<h2 id="第一步-新建一个注册表文件">第一步: 新建一个注册表文件</h2>
+
+<p>新建一个文件, 然后把下面的文字复制到文件里, 保存为 <code class="language-plaintext highlighter-rouge">.reg</code> 结尾的文件即可</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\Applications\photoviewer.dll]
+
+[HKEY_CLASSES_ROOT\Applications\photoviewer.dll\shell]
+
+[HKEY_CLASSES_ROOT\Applications\photoviewer.dll\shell\open]
+"MuiVerb"="@photoviewer.dll,-3043"
+
+[HKEY_CLASSES_ROOT\Applications\photoviewer.dll\shell\open\command]
+@=hex(2):25,00,53,00,79,00,73,00,74,00,65,00,6d,00,52,00,6f,00,6f,00,74,00,25,\
+00,5c,00,53,00,79,00,73,00,74,00,65,00,6d,00,33,00,32,00,5c,00,72,00,75,00,\
+6e,00,64,00,6c,00,6c,00,33,00,32,00,2e,00,65,00,78,00,65,00,20,00,22,00,25,\
+00,50,00,72,00,6f,00,67,00,72,00,61,00,6d,00,46,00,69,00,6c,00,65,00,73,00,\
+25,00,5c,00,57,00,69,00,6e,00,64,00,6f,00,77,00,73,00,20,00,50,00,68,00,6f,\
+00,74,00,6f,00,20,00,56,00,69,00,65,00,77,00,65,00,72,00,5c,00,50,00,68,00,\
+6f,00,74,00,6f,00,56,00,69,00,65,00,77,00,65,00,72,00,2e,00,64,00,6c,00,6c,\
+00,22,00,2c,00,20,00,49,00,6d,00,61,00,67,00,65,00,56,00,69,00,65,00,77,00,\
+5f,00,46,00,75,00,6c,00,6c,00,73,00,63,00,72,00,65,00,65,00,6e,00,20,00,25,\
+00,31,00,00,00
+
+[HKEY_CLASSES_ROOT\Applications\photoviewer.dll\shell\open\DropTarget]
+"Clsid"="{FFE2A43C-56B9-4bf5-9A79-CC6D4285608A}"
+
+[HKEY_CLASSES_ROOT\Applications\photoviewer.dll\shell\print]
+
+[HKEY_CLASSES_ROOT\Applications\photoviewer.dll\shell\print\command]
+@=hex(2):25,00,53,00,79,00,73,00,74,00,65,00,6d,00,52,00,6f,00,6f,00,74,00,25,\
+00,5c,00,53,00,79,00,73,00,74,00,65,00,6d,00,33,00,32,00,5c,00,72,00,75,00,\
+6e,00,64,00,6c,00,6c,00,33,00,32,00,2e,00,65,00,78,00,65,00,20,00,22,00,25,\
+00,50,00,72,00,6f,00,67,00,72,00,61,00,6d,00,46,00,69,00,6c,00,65,00,73,00,\
+25,00,5c,00,57,00,69,00,6e,00,64,00,6f,00,77,00,73,00,20,00,50,00,68,00,6f,\
+00,74,00,6f,00,20,00,56,00,69,00,65,00,77,00,65,00,72,00,5c,00,50,00,68,00,\
+6f,00,74,00,6f,00,56,00,69,00,65,00,77,00,65,00,72,00,2e,00,64,00,6c,00,6c,\
+00,22,00,2c,00,20,00,49,00,6d,00,61,00,67,00,65,00,56,00,69,00,65,00,77,00,\
+5f,00,46,00,75,00,6c,00,6c,00,73,00,63,00,72,00,65,00,65,00,6e,00,20,00,25,\
+00,31,00,00,00
+
+[HKEY_CLASSES_ROOT\Applications\photoviewer.dll\shell\print\DropTarget]
+"Clsid"="{60fd46de-f830-4894-a628-6fa81bc0190d}"
+
+</code></pre></div></div>
+
+<h2 id="第二步-双击文件运行">第二步: 双击文件运行</h2>
+
+<p>双击上一步新建的文件, 出现提示, 确认运行就 OK 了.</p>
+
+<h2 id="第三步-默认程序打开方式">第三步: 默认程序打开方式</h2>
+
+<p>选择一张图片, 右键选择”打开方式”–&gt;”选择其他应用”, 弹出对话框向下拉, 点击更多, 然后选择 “Windows照片查看器”, 把“始终使用此应用打开…”的对勾打上, 点击确定.</p>
+:ET
