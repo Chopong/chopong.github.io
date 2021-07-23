@@ -1,67 +1,50 @@
 <head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="{{ site.description }}">
-	
-	{% include ogmeta.html %}
-	
-	<link rel='shortcut icon' type='image/png' href='{{ site.baseurl }}/img/icons/cp.png' />
-
-    <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
-
-    <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
-	
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="{{ "/sundry/css/bootstrap.min.css" | prepend: site.baseurl | prepend: site.url }}">
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ "/sundry/css/clean-blog.css" | prepend: site.baseurl | prepend: site.url }}">
-	
-	<!-- Adjust Colors -->
-    <link rel="stylesheet" href="{{ "/sundry/colorscheme.scss" | prepend: site.baseurl | prepend: site.url }}">
-
-    <!-- Pygments Github CSS -->
-    <link rel="stylesheet" href="{{ "/sundry/css/syntax.css" | prepend: site.baseurl | prepend: site.url }}">
-    <link rel="stylesheet" href="{{ "/sundry/sidebar.less" | prepend: site.baseurl | prepend: site.url }}">
-
-
-    <!-- Custom Fonts -->
-    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href='/sundry/css/googlelora.css' rel='stylesheet' type='text/css'>
-    <link href='/sundry/css/googleopensans.css' rel='stylesheet' type='text/css'>
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-	<!-- Math Jax -->
-	<script type="text/x-mathjax-config">
-	MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
-	</script>
-	<script type="text/javascript"
-	src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-	</script>
-	<script type="text/x-mathjax-config">
-	MathJax.Hub.Config({
-		TeX: { equationNumbers: { autoNumber: "AMS" } }
-	});
-	</script>
-
-	<!--<script src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.4.13/d3.min.js" type="text/javascript"></script>-->
-
-    <!-- jQuery -->
-	<script src="{{ site.baseurl }}/sundry/js/jquery-3.4.0.min.js"></script>
-
-	<!-- Bootstrap Core JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
-	<!-- Custom Theme JavaScript -->
-	<script src="{{ "/sundry/js/clean-blog.min.js " | prepend: site.baseurl | prepend: site.url }}"></script>
-{% seo %}
-	{% include analytics.html %}
-	
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{ site.description }}">
+  <link rel='shortcut icon' type='image/png' href='{{ site.baseurl }}/sundry/logo/favicon.ico' />
+  <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="{{ site.url }}/{{ site.baseurl }}/{{ page.url }}" />
+  <meta property="og:image" content="{{ site.url }}/{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}">
+  <meta property="og:image" content="{{ site.url }}{{ site.sidebar-avatar }}">
+  <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+  <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+  <!-- Bootstrap Core CSS -->
+  <link rel="stylesheet" href="{{ "/sundry/css/bootstrap.min.css" | prepend: site.baseurl | prepend: site.url }}">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{{ "/sundry/css/clean-blog.css" | prepend: site.baseurl | prepend: site.url }}">
+  <!-- Adjust Colors -->
+  <link rel="stylesheet" href="{{ "/sundry/colorscheme.scss" | prepend: site.baseurl | prepend: site.url }}">
+  <!-- Pygments Github CSS -->
+  <link rel="stylesheet" href="{{ "/sundry/css/syntax.css" | prepend: site.baseurl | prepend: site.url }}">
+  <link rel="stylesheet" href="{{ "/sundry/sidebar.less" | prepend: site.baseurl | prepend: site.url }}">
+  <link rel="stylesheet" type="text/css" href="{{ "/sundry/css/bootstrap.min.css" | prepend: site.baseurl | prepend: site.url }}" />
+  <link rel="stylesheet" type="text/css" href="{{ "/sundry/css/stylesheet.css" | prepend: site.baseurl | prepend: site.url }}" />
+  <link rel="stylesheet" type="text/css" id="color-switcher" href="{{ "/sundry/css/jade.css" | prepend: site.baseurl | prepend: site.url }}" />
+  <!-- Custom Fonts -->
+  <link href="{{ "/sundry/font/font-awesome/css/font-awesome.min.css" | prepend: site.baseurl | prepend: site.url }}" rel="stylesheet" type="text/css">
+  <link href="{{ "/sundry/css/googlelora.css" | prepend: site.baseurl | prepend: site.url }}" rel='stylesheet' type='text/css'>
+  <link href="{{ "/sundry/css/googleopensans.css" | prepend: site.baseurl | prepend: site.url }}" rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="{{ "/sundry/css/layui/css/layui.css" | prepend: site.baseurl | prepend: site.url }}">
+  <link rel="stylesheet" href="{{ "/sundry/css/common.css" | prepend: site.baseurl | prepend: site.url }}">
+  <!-- Math Jax -->
+  <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/x-mathjax-config"> MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
+  <!-- jQuery -->
+  <script src="/sundry/js/jquery-3.4.0.min.js"></script>
+  <!-- Bootstrap Core JavaScript -->
+  <script src="/sundry/js/bootstrap.bundle.min.js"></script>
+  <script src="/sundry/css/layui/layui.js"></script>
+  <!-- JavaScript -->
+  <script src="{{ "sundry/js/jquery.min.js" | prepend: site.baseurl | prepend: site.url }}"></script>
+  <script src="{{ "sundry/js/typed.min.js" | prepend: site.baseurl | prepend: site.url }}"></script>
+  <script src="{{ "sundry/js/custom-jquery.js" | prepend: site.baseurl | prepend: site.url }}"></script>
+  <script src="{{ "sundry/font/font-awesome/css/font-awesome.min.css" | prepend: site.baseurl | prepend: site.url }}"></script>
+  <!-- Custom Theme JavaScript -->
+  <script src="{{ "/sundry/js/clean-blog.min.js " | prepend: site.baseurl | prepend: site.url }}"></script>
+  {% seo %}
+  {% include analytics.html %}
 </head>

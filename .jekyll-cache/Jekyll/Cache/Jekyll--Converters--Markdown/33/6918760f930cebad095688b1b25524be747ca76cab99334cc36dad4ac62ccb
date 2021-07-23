@@ -1,0 +1,286 @@
+I"�A<h1 id="table-of-contents">Table of Contents</h1>
+
+<ul id="markdown-toc">
+  <li><a href="#table-of-contents" id="markdown-toc-table-of-contents">Table of Contents</a></li>
+  <li><a href="#安装linux后的部署" id="markdown-toc-安装linux后的部署">安装Linux后的部署</a>    <ul>
+      <li><a href="#1-安装firmware-iwlwifi" id="markdown-toc-1-安装firmware-iwlwifi">1. 安装firmware-iwlwifi</a></li>
+      <li><a href="#2-更改etcaptsourceslist" id="markdown-toc-2-更改etcaptsourceslist">2. 更改/etc/apt/sources.list</a>        <ul>
+          <li><a href="#1-去掉光盘源" id="markdown-toc-1-去掉光盘源">1). 去掉光盘源</a></li>
+          <li><a href="#2-增加国内软件源" id="markdown-toc-2-增加国内软件源">2). 增加国内软件源</a>            <ul>
+              <li><a href="#中科大" id="markdown-toc-中科大">中科大</a></li>
+              <li><a href="#阿里云" id="markdown-toc-阿里云">阿里云</a></li>
+              <li><a href="#清华大学" id="markdown-toc-清华大学">清华大学</a></li>
+              <li><a href="#执行" id="markdown-toc-执行">执行</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#3-安装启动失败的插件" id="markdown-toc-3-安装启动失败的插件">3. 安装启动失败的插件</a></li>
+      <li><a href="#4-安装中文输入法" id="markdown-toc-4-安装中文输入法">4. 安装中文输入法</a></li>
+      <li><a href="#5-更改开机grub图片安装主题和优化桌面" id="markdown-toc-5-更改开机grub图片安装主题和优化桌面">5. 更改开机Grub图片，安装主题和优化桌面</a>        <ul>
+          <li><a href="#1-图片" id="markdown-toc-1-图片">1). 图片:</a></li>
+          <li><a href="#2-主题" id="markdown-toc-2-主题">2). 主题</a></li>
+          <li><a href="#3-插件" id="markdown-toc-3-插件">3). 插件:</a></li>
+        </ul>
+      </li>
+      <li><a href="#6-手动添加程序" id="markdown-toc-6-手动添加程序">6. 手动添加程序</a></li>
+      <li><a href="#7-安装conky" id="markdown-toc-7-安装conky">7. 安装conky</a>        <ul>
+          <li><a href="#1-安装gcc-make-否则报错" id="markdown-toc-1-安装gcc-make-否则报错">1). <code class="language-plaintext highlighter-rouge">安装gcc</code>, <code class="language-plaintext highlighter-rouge">make</code>, 否则报错</a></li>
+          <li><a href="#2-手动安装字体" id="markdown-toc-2-手动安装字体">2). 手动安装字体</a></li>
+          <li><a href="#3可选下载conky-colors-解压到conky文件夹" id="markdown-toc-3可选下载conky-colors-解压到conky文件夹">3)[可选]下载conky-colors, 解压到conky文件夹</a></li>
+        </ul>
+      </li>
+      <li><a href="#8-安装网易云音乐" id="markdown-toc-8-安装网易云音乐">8. 安装网易云音乐</a>        <ul>
+          <li><a href="#1-修改依赖" id="markdown-toc-1-修改依赖">1). 修改依赖</a></li>
+          <li><a href="#2-修改control" id="markdown-toc-2-修改control">2). 修改control</a></li>
+        </ul>
+      </li>
+      <li><a href="#9-安装wpsfonts" id="markdown-toc-9-安装wpsfonts">9. 安装WPS+fonts</a></li>
+      <li><a href="#10-安装emacs" id="markdown-toc-10-安装emacs">10. 安装emacs</a></li>
+      <li><a href="#11-安装belachbit" id="markdown-toc-11-安装belachbit">11. 安装belachbit</a></li>
+      <li><a href="#12-安装文献管理器" id="markdown-toc-12-安装文献管理器">12. 安装文献管理器</a></li>
+      <li><a href="#13-修改系统时间" id="markdown-toc-13-修改系统时间">13. 修改系统时间</a></li>
+      <li><a href="#14-安装sudo" id="markdown-toc-14-安装sudo">14. 安装sudo</a></li>
+      <li><a href="#15-安装其他软件" id="markdown-toc-15-安装其他软件">15. 安装其他软件</a>        <ul>
+          <li><a href="#shutter" id="markdown-toc-shutter">shutter</a></li>
+          <li><a href="#kmplot" id="markdown-toc-kmplot">kmplot</a></li>
+          <li><a href="#uget" id="markdown-toc-uget">uget+</a></li>
+          <li><a href="#periodic" id="markdown-toc-periodic">periodic</a></li>
+          <li><a href="#musescore" id="markdown-toc-musescore">musescore</a></li>
+          <li><a href="#scilab" id="markdown-toc-scilab">scilab</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="安装linux后的部署">安装Linux后的部署</h1>
+
+<h3 id="1-安装firmware-iwlwifi">1. 安装firmware-iwlwifi</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    su
+    dpkg <span class="nt">-i</span> firmware-iwlwifi
+    modprobe <span class="nt">-r</span> iwlwifi<span class="p">;</span> modprobe iwlwifi
+</code></pre></div></div>
+
+<p>当系统的无线图标消失，无法连接无线网络时，终端执行以下代码：</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nb">sudo rm</span> /var/lib/NetworkManager/NetworkManager.state
+    <span class="nb">sudo </span>service network-manager restart
+</code></pre></div></div>
+
+<p>另有说法：<code class="language-plaintext highlighter-rouge">systemctl restart NetworkManager.service</code></p>
+
+<h3 id="2-更改etcaptsourceslist">2. 更改/etc/apt/sources.list</h3>
+
+<h4 id="1-去掉光盘源">1). 去掉光盘源</h4>
+
+<h4 id="2-增加国内软件源">2). 增加国内软件源</h4>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="o">[</span><span class="nb">sudo</span><span class="o">]</span> vi /etc/apt/sources.list
+</code></pre></div></div>
+
+<h5 id="中科大">中科大</h5>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    deb http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib
+    deb-src http://mirrors.ustc.edu.cn/kali kali-rolling main non-free contrib
+</code></pre></div></div>
+
+<h5 id="阿里云">阿里云</h5>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    deb http://mirrors.aliyun.com/kali kali-rolling main non-free contrib
+    deb-src http://mirrors.aliyun.com/kali kali-rolling main non-free contrib
+</code></pre></div></div>
+
+<h5 id="清华大学">清华大学</h5>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    deb http://mirrors.tuna.tsinghua.edu.cn/kali kali-rolling main contrib non-free
+    deb-src https://mirrors.tuna.tsinghua.edu.cn/kali kali-rolling main contrib non-free
+</code></pre></div></div>
+
+<h5 id="执行">执行</h5>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="o">[</span><span class="nb">sudo</span><span class="o">]</span> apt-get update
+    <span class="o">[</span><span class="nb">sudo</span><span class="o">]</span> apt-get upgrade
+</code></pre></div></div>
+
+<h3 id="3-安装启动失败的插件">3. 安装启动失败的插件</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    apt-get <span class="nb">install </span>firmware-realtek
+    apt-get <span class="nb">install </span>firmware-amd-graphics
+</code></pre></div></div>
+
+<h3 id="4-安装中文输入法">4. 安装中文输入法</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    apt-get <span class="nb">install </span>fcitx-sunpinyin
+    apt-get <span class="nb">install </span>fcitx-ui-classic <span class="o">&amp;&amp;</span> apt-get <span class="nb">install </span>fcitx-ui-light
+</code></pre></div></div>
+
+<h3 id="5-更改开机grub图片安装主题和优化桌面">5. 更改开机Grub图片，安装主题和优化桌面</h3>
+
+<h4 id="1-图片">1). 图片:</h4>
+
+<p>直接将图片复制到<code class="language-plaintext highlighter-rouge">/boot/grub/</code>然后更新<code class="language-plaintext highlighter-rouge">upgrade-grub</code></p>
+
+<h4 id="2-主题">2). 主题</h4>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    apt-get <span class="nb">install </span>git
+    <span class="nb">mkdir</span> ./themes
+    git clone http://github.com/tliron/install-gnome-themes
+    <span class="nb">cd </span>install-gnome-themes
+    ./install-gnome-themes
+    ./install-gnome-themes
+    <span class="nb">cd</span> ..
+    clear
+
+    git clone http://github.com/system76/pop-icon-theme.git
+    <span class="nb">cd </span>pop-icon-theme
+    make <span class="nb">install
+    cd</span> ..
+    clear
+
+    git clone https://github.com/numixproject/numix-icon-theme-circle.git
+    <span class="nb">cd </span>numix-icon-theme-circle
+    <span class="nb">mv </span>Numix-Circle /usr/share/icons
+    <span class="nb">mv </span>Numix-Circle-Light /usr/share/icons
+</code></pre></div></div>
+
+<h4 id="3-插件">3). 插件:</h4>
+<p>接着打开gnome-software, 搜索插件</p>
+
+<ul>
+  <li>
+    <p>user themes</p>
+  </li>
+  <li>
+    <p>dash to dock</p>
+  </li>
+  <li>
+    <p>tilix dropdown</p>
+  </li>
+  <li>
+    <p>backslide</p>
+  </li>
+  <li>
+    <p>openweather</p>
+  </li>
+  <li>
+    <p>media player indicator</p>
+  </li>
+  <li>
+    <p>topIcons plus</p>
+  </li>
+</ul>
+
+<h3 id="6-手动添加程序">6. 手动添加程序</h3>
+
+<p>新建文件demo.desktop，添加下列字符到 <code class="language-plaintext highlighter-rouge">/usr/share/applications/demo.desktop</code> 或 <code class="language-plaintext highlighter-rouge">~/.local/share/applications/</code></p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="o">[</span>Desktop Entry]
+    <span class="nv">Name</span><span class="o">=</span>demo
+    <span class="nv">Type</span><span class="o">=</span>Application
+    <span class="nv">Exec</span><span class="o">=</span>/usr/bin/demo
+    <span class="nv">Icon</span><span class="o">=</span>/img/article/2019-05-02-demo.png
+    <span class="nv">Categories</span><span class="o">=</span>Application<span class="p">;</span>Tools<span class="p">;</span>
+    <span class="nv">Terminal</span><span class="o">=</span><span class="nb">false</span>
+</code></pre></div></div>
+
+<h3 id="7-安装conky">7. 安装conky</h3>
+
+<h4 id="1-安装gcc-make-否则报错">1). <code class="language-plaintext highlighter-rouge">安装gcc</code>, <code class="language-plaintext highlighter-rouge">make</code>, 否则报错</h4>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="o">[</span><span class="nb">sudo</span><span class="o">]</span> apt <span class="nb">install </span>gcc make
+</code></pre></div></div>
+
+<h4 id="2-手动安装字体">2). 手动安装字体</h4>
+
+<p><a href="https://packages.ubuntu.com/zh-cn/xenial/all/ttf-ubuntu-font-family/download"><code class="language-plaintext highlighter-rouge">ttf-ubuntu-font-family</code></a>,<a href="https://packages.debian.org/wheezy/amd64/python-statgrab/download"><code class="language-plaintext highlighter-rouge">python-statgrab</code></a>，<a href="https://packages.debian.org/jessie/all/python-support/download"><code class="language-plaintext highlighter-rouge">python-support</code></a>,<a href="https://packages.debian.org/wheezy/amd64/libstatgrab6/download"><code class="language-plaintext highlighter-rouge">libstatgrab6</code></a></p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nb">sudo </span>apt-get <span class="nb">install </span>aptitude python-keyring hddtemp curl lm-sensors
+    <span class="nb">sudo chmod </span>u+s /usr/sbin/hddtemp
+    <span class="nb">sudo </span>sensors-detect
+</code></pre></div></div>
+<p>answering Yes (default) to all questions, even that last one that defaults to No</p>
+
+<h4 id="3可选下载conky-colors-解压到conky文件夹">3)[可选]下载conky-colors, 解压到conky文件夹</h4>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nb">cd</span> /conky
+    make
+    make <span class="nb">install
+    </span>conky-colors <span class="nt">--help</span> <span class="c">#this command has to be performed at least once.</span>
+    conky-colors <span class="nt">--theme</span><span class="o">=</span>custom <span class="nt">--default-color</span><span class="o">=</span>black <span class="nt">--color0</span><span class="o">=</span>cyan <span class="nt">--color1</span><span class="o">=</span>green <span class="nt">--color2</span><span class="o">=</span>orange <span class="nt">--color3</span><span class="o">=</span>red <span class="nt">--ubuntu</span> <span class="nt">--cpu</span><span class="o">=</span>2 <span class="nt">--updates</span> <span class="nt">--proc</span><span class="o">=</span>3 <span class="nt">--clock</span><span class="o">=</span>lucky <span class="nt">--calendar</span> <span class="nt">--nvidia</span> <span class="nt">--hd</span><span class="o">=</span>default <span class="nt">--hdtemp1</span><span class="o">=</span>sda <span class="nt">--photo</span> <span class="nt">--photord</span> <span class="nt">--network</span> <span class="nt">--unit</span><span class="o">=</span>C <span class="nt">--side</span><span class="o">=</span>right <span class="nt">--bbcweather</span><span class="o">=</span>1586 <span class="nt">--weather</span><span class="o">=</span>CHXX0100 <span class="nt">--rhythmbox</span><span class="o">=</span>c
+</code></pre></div></div>
+
+<p>更改conky 或者conky.conf 配置文件，运行</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    conky <span class="nt">-d</span> /home/chopong/.conkycolors/conkyrc
+</code></pre></div></div>
+
+<h3 id="8-安装网易云音乐">8. 安装网易云音乐</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>由于网易云音乐是和Deepin开发的Linux版本, 所以其他Linux需要手动修复依赖
+</code></pre></div></div>
+
+<h4 id="1-修改依赖">1). 修改依赖</h4>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nb">mkdir</span> <span class="nt">-p</span> extract/DEBIAN
+    dpkg-deb <span class="nt">-x</span> neteasemusic.deb extract/
+    dpkg-deb <span class="nt">-e</span> neteasemusic.deb extract/DEBIAN
+</code></pre></div></div>
+
+<h4 id="2-修改control">2). 修改control</h4>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nb">mkdir </span>build
+    dpkg-deb <span class="nt">-b</span> extract/  build/
+</code></pre></div></div>
+
+<h3 id="9-安装wpsfonts">9. 安装WPS+fonts</h3>
+
+<p>wps字体直接安装就行</p>
+
+<h3 id="10-安装emacs">10. 安装emacs</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nb">sudo </span>apt <span class="nb">install </span>emacs
+</code></pre></div></div>
+<p>具体配置, 以后会慢慢分享</p>
+
+<h3 id="11-安装belachbit">11. 安装belachbit</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="o">[</span><span class="nb">sudo</span><span class="o">]</span> apt <span class="nb">install </span>bleachbit
+</code></pre></div></div>
+
+<h3 id="12-安装文献管理器">12. 安装文献管理器</h3>
+
+<p><a href="https://en.wikipedia.org/wiki/Comparison_of_reference_management_software">文献管理器比较</a></p>
+
+<p>可以尝试Zotero</p>
+
+<h3 id="13-修改系统时间">13. 修改系统时间</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nb">sudo </span>apt-get <span class="nb">install </span>ntpdate
+    <span class="nb">sudo </span>ntpdate time.windows.com
+    <span class="nb">sudo </span>hwclock <span class="nt">--localtime</span> <span class="nt">--systohc</span>
+</code></pre></div></div>
+<h3 id="14-安装sudo">14. 安装sudo</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    apt-get <span class="nb">install sudo
+    </span>su - <span class="c">#这里有-，意思是将root变量传输过去</span>
+    visudo
+    chopong <span class="nv">ALL</span><span class="o">=(</span>ALL<span class="o">)</span> ALL <span class="c">#修改最后一行</span>
+</code></pre></div></div>
+
+<h3 id="15-安装其他软件">15. 安装其他软件</h3>
+<p>直接apt-get install xx</p>
+
+<h4 id="shutter">shutter</h4>
+
+<h4 id="kmplot">kmplot</h4>
+
+<h4 id="uget">uget+</h4>
+
+<h4 id="periodic">periodic</h4>
+
+<h4 id="musescore">musescore</h4>
+
+<h4 id="scilab">scilab</h4>
+
+:ET

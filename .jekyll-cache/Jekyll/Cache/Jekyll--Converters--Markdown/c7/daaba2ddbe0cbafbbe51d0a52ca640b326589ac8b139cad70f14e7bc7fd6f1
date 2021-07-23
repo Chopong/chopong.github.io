@@ -1,0 +1,31 @@
+I"�<h1 id="table-of-contents">Table of Contents</h1>
+<ul id="markdown-toc">
+  <li><a href="#table-of-contents" id="markdown-toc-table-of-contents">Table of Contents</a></li>
+  <li><a href="#2021-07-22-org读书与看报" id="markdown-toc-2021-07-22-org读书与看报">2021-07-22-Org读书与看报</a>    <ul>
+      <li><a href="#安装插件" id="markdown-toc-安装插件">安装插件</a>        <ul>
+          <li><a href="#11-org-ref插件的安装" id="markdown-toc-11-org-ref插件的安装">1.1 Org-ref插件的安装</a></li>
+          <li><a href="#12-citeproc-org的安装" id="markdown-toc-12-citeproc-org的安装">1.2 Citeproc-org的安装</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="2021-07-22-org读书与看报">2021-07-22-Org读书与看报</h1>
+
+<p>Date: 2021-07-22,四,11:38:39
+Author: Wei Shaopeng
+Email: Chopong@qq.com</p>
+
+<h2 id="安装插件">安装插件</h2>
+
+<h3 id="11-org-ref插件的安装">1.1 Org-ref插件的安装</h3>
+
+<p>org-ref是一个在org-mode中智能插入参考文献的包，可以用如下命令安装org-ref插件：</p>
+
+<p>M-x package-install org-ref</p>
+
+<h3 id="12-citeproc-org的安装">1.2 Citeproc-org的安装</h3>
+
+<p>核桃仁申达股份使得</p>
+:ET

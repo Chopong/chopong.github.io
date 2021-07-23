@@ -1,0 +1,106 @@
+---
+layout: empty
+---
+
+<header class="intro-header" style="background-image: url('../img/home-bg2.jpg');">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-heading" style="padding: 100px 0">
+         {% include nav.html %}
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+{% assign groups = site.posts | where: 'categories', '数学习题' %}
+
+{% for post in groups %}
+     {% assign tags = tags |concat: post.tags |uniq %}
+{% endfor %}
+
+<div class="main-content item-box">
+    <div class="item-left">
+        <div class="type-module layui-row layui-col-space20">
+
+            {% for tag in tags %}
+            <div class="layui-col-md6">
+                <div class="type-module-item layui-row">
+                    <div class="item-title-row layui-row row-align">
+                        <div class="layui-col-md10 row-align font-size2">
+                            <div class="left-icon"></div>
+                            <span class="font-bold" style="margin-left: 5px;">{{- tag -}}</span>
+                        </div>
+                        <div class="layui-col-md2 text-align-right text-underline only-pointer font-size1 font-color3">
+                            <a href="#">更多</a>
+                        </div>
+                    </div>
+                    <div class="item-ul-row layui-row">
+                      <ul>
+                         {% assign ncount = 0 %}
+                            {% for post in groups %}
+                        {% if post.tags contains tag and ncount < 5 %}
+                                                                  {% assign ncount = ncount | plus: 1 %}
+                            <li>
+                                <div class="ul-li-div layui-row row-align">
+                                    <div class="layui-col-md9 layui-elip font-size2">&gt; &nbsp;<a href="{{ post.url }}">{{- post.title -}}</a>
+                                    </div>
+                                    <div class="layui-col-md3 text-align-right font-size1 font-color3">{{ post.date | date:"%Y-%m-%d"}}</div>
+                                </div>
+                            </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="zonhe-row layui-row">
+            <div class="item-title-row layui-row row-align">
+                <div class="layui-col-md10 row-align font-size2">
+                    <div class="left-icon"></div>
+                    <span class="font-bold" style="margin-left: 5px;">标签</span>
+                </div>
+            </div>
+            <div class="zonhe-ul-row layui-row">
+                {% for tag in tags %}
+                    {% for post in groups %}
+                        {% if post.tags contains tag %}
+                            {% assign count = tag | size %}
+                            {% assign fontsize = count | times: 4 %}
+                       {% endif %}
+                    {% endfor %}
+                    {% if count  > 4 %}
+                            <a class="post-tags-item" href="{{ page.url }}?keyword={{ tag }}"
+                            title="{{ tag }}" data-count="{{ count }}"
+                            style="font-size: {% if fontsize > 48 %} 48px {% else %}{{ fontsize }}px {% endif %};">{{ tag }}</a>
+
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="item-right">
+      {% include info.html %}
+        <div class="sharetype-list-box box-bg">
+            <div class="pane-title layui-row row-align">
+                <img src="../img/icons/lingxing.png">
+                <span>最新文章</span>
+            </div>
+            <ul>
+                {% for post in groups limit:10 %}
+                <li class="list-item layui-row layui-elip"><a href="{{ post.url }}">{{ post.title}} {{ post.date | date:"%Y-%m-%d"}}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="sharetype-list-box box-bg">
+            <div class="pane-title layui-row row-align">
+                <img src="../img/icons/lingxing.png">
+                <span>博客信息</span>
+            </div>
+            <div class="web-msg">博客站点更多信息请查看 {{page.tags }}<a href="#">关于博客</a></div>
+        </div>
+    </div>
+</div>

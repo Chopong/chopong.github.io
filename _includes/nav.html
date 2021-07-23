@@ -9,20 +9,19 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ site.baseurl }}/">{{ site.title }}</a>
+            <a class="navbar-brand" href="{{ site.baseurl }}/homepage.html"><img src="{{site.baseurl}}/img/logos/v1alt.png" height="30px" /></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="{{ site.baseurl }}/">Home</a>
+                    <a href="{{ site.baseurl }}/">博客主页</a>
                 </li>
-		{% for page in site.pages %}{% if page.title %}
-                <li>
-                    <a href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
-                </li>
-                {% endif %}{% endfor %}
+
+                {% for category in site.categories %}
+                        <li><a href="{{site.baseurl}}/category/{{ category | first }}.html">{{ category | first }}</a></li>
+                        {% endfor %}
             </ul>
         </div>
         <!-- /.navbar-collapse -->

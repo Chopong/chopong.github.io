@@ -1,0 +1,94 @@
+---
+layout: none
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>半路出家</title>
+    <link rel='shortcut icon' type='image/png' href='/sundry/logo/favicon.ico' />
+    <!-- Stylesheet  -->
+    <link rel="stylesheet" type="text/css" href="sundry/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="sundry/css/stylesheet.css" />
+    <link rel="stylesheet" type="text/css" id="color-switcher" href="sundry/css/jade.css" />
+  </head>
+  <body data-spy="scroll" data-target=".navbar">
+    <!-- Animsition Preloader -->
+    <div class="animsition-preloader">
+      <div>
+        <div class="utf-spinner-four">
+        </div>
+      </div>
+    </div>
+    <!-- Animsition Preloader End -->
+    <!-- Main Wrapper -->
+    <div id="main-wrapper">
+      <!-- Header  -->
+      <header id="header" class="sticky-top-slide">
+        <!-- Navbar -->
+        <nav class="primary-menu bg-transparent">
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="background:none;">
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="./plugins/search/">搜索</a></li>
+              <li><a href="./category/about.html">关于</a></li>
+              <li><a href="{{ site.baseurl }}/">博客主页</a></li>
+              {% for category in site.categories %}
+              <li><a href="{{site.baseurl}}/category/{{ category | first }}.html">{{ category | first }}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+        </nav>
+        <!-- Navbar End -->
+      </header>
+      <!-- Header End -->
+
+      <!-- Content -->
+      <div id="content" role="main">
+        <!-- Intro -->
+        <section id="home">
+          <div class="utf-hero-wrap">
+            <div class="utf-hero-mask opacity-8 bg-dark"></div>
+            <div class="utf-hero-bg parallax" style="background-image:url('img/home-bg2.jpg');"></div>
+            <div class="utf-hero-content section d-flex fullscreen">
+              <div class="container my-auto">
+                <div class="row">
+                  <div class="col-12 text-center">
+                    <div class="typed-strings">
+                      <p>数学爱好者.</p>
+                      <p>统计学渣.</p>
+                      <p>技术宅.</p>
+                      <p>数码爱好者.</p>
+                    </div>
+                    <br><br><br>
+                    <a class="logo" href="index.html" style="border-top: 2em;"> <img src="sundry/logo/v1alt.png" alt="Logo Light"/> </a>
+                    <br><br><br>
+                    <h2 class="text-16 font-weight-800 text-white mb-2 mb-md-3">Hello I'm <span
+                                                                                            class="typed"></span></h2>
+                    <p class="text-4 text-light mb-4">我是一个数码爱好者，同时也是一个数学爱好者，然而统计学却学的很烂，如果你有什么建议或者有什么想法，欢迎联系我
+                      <br> I'm font of digital device and technology as well as mathematics, however, my statistics sucks. Email me if you want to.
+                      <br><br>
+                      So we beat on, boats against the current, borne back ceaselessly into the past.
+                    </p>
+                    <br>
+                    <a href="https://chopong.github.io/"
+                       class="btn btn-primary rounded shadow-none mt-2 mr-2">My Blog</a>
+                    <a href="/sundry/contact.html"
+                       class="btn btn-outline-primary rounded shadow-none mt-2">Contact</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Intro end -->
+      </div>
+      <!-- Content end -->
+    </div>
+    <!-- Main Wrapper End -->
+    <!-- JavaScript -->
+    <script src="sundry/js/jquery.min.js"></script>
+    <script src="sundry/js/typed.min.js"></script>
+    <script src="sundry/js/custom-jquery.js"></script>
+    <script src="sundry/font/font-awesome/css/font-awesome.min.css"></script>
+  </body>
+</html>

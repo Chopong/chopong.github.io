@@ -1,0 +1,58 @@
+I"�<h1 id="2021-07-22-org读书与看报">2021-07-22-Org读书与看报</h1>
+
+<h2 id="安装插件">安装插件</h2>
+
+<h3 id="11-org-ref插件的安装">1.1 Org-ref插件的安装</h3>
+
+<p>org-ref是一个在org-mode中智能插入参考文献的包，可以用如下命令安装org-ref插件：</p>
+
+<p>M-x package-install org-ref</p>
+
+<h3 id="12-citeproc-org的安装">1.2 Citeproc-org的安装</h3>
+
+<p>citeproc-org是一个用csl文件管理参考文献输入样式的包，目前在melpa源中没有这个包。因此，首先需要在git-hub上下载最新的citeproc-org安装包： cite-proc的git-hub页面 ，再使用如下命令进行安装：</p>
+
+<p>M-x package-install-file 安装包路径</p>
+
+<p>Citeproc-org 目前已经可以在melpa上直接安装了。谢谢老师，不然还不知道有这样的工具。</p>
+
+<h3 id="21-表格">2.1 表格</h3>
+
+<p>使用CSDN上的方法可以在文件中 插入表格，用如下的方式可以进行表格命名及参数设置。</p>
+
+<p>#+CAPTION: 表格标题
+#+ATTR_HTML: :boarder 1 :rules row :frame boarder</p>
+
+<h3 id="22-图片">2.2 图片</h3>
+
+<p>在需要插入图片的部位 C-c C-l 。选取需要插入的图片文件名, 不要在提示中输入图片说明， 否则图片在输出文件中仅为一条链接， 无法显示图片本身。</p>
+
+<p>再在其上方加入图片说明及显示参数：</p>
+
+<p>#+CAPTION: 图片标题
+#+ATTR_HTML:  :width 80%</p>
+
+<h3 id="23-参考文献">2.3 参考文献</h3>
+
+<p>在文首加入参考文献的格式文件：</p>
+
+<p>#+CSL_STYLE: /path/to/csl_style_file
+在文末加入参考文献链接：</p>
+
+<p>M-x org-ref-insert-bibliography-link
+在文中相应位置插入参考文献：</p>
+
+<p>M-x org-ref-helm-insert-cite-link</p>
+
+<h2 id="3-输出">3 输出</h2>
+
+<p>在输出前首先要激活citeproc-org， 才能在输出文件中应用csl样式。</p>
+
+<p>M-x citeproc-org-setup
+输出为html文件</p>
+
+<p>C-c C-e h h
+输出为odt文件</p>
+
+<p>C-c C-e o o</p>
+:ET

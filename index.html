@@ -1,38 +1,200 @@
 ---
-layout: page
+layout: empty
 ---
-{% for post in paginator.posts %}
-<div class="post-preview">
-    <a href="{{ post.url | prepend: site.baseurl }}">
-        <h2 class="post-title">            {{ post.title }}
-        </h2>
-        {% if post.subtitle %}
-        <h3 class="post-subtitle">
-            {{ post.subtitle }}
-        </h3>
-        {% endif %}
-    </a>
-    <p class="post-meta" style="margin-bottom:5px">Posted by {{ post.author }} on {{ post.date | date: "%B %-d, %Y" }}</p>
-	<div class="notepad-index-post-tags" style="">
-		{% for tag in post.tags %}<a href="{{ site.baseurl }}/plugins/search/index.html#{{ tag | cgi_encode }}" title="Other posts from the {{ tag | capitalize }} tag">{{ tag | capitalize }}</a>{% unless forloop.last %}&nbsp;{% endunless %}{% endfor %}
-	</div>
+
+<!-- Post Header -->
+<header class="intro-header" style="background-image: url('./img/home-bg2.jpg');">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-heading" style="padding: 100px 0">
+         {% include nav.html %}
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="main-content item-box">
+    <div class="item-left">
+        <div class="layui-row carousel-box">
+            <div class="layui-carousel" id="my-carousel" lay-filter="carouselimg">
+                <div carousel-item>
+                    <div><img src="./img/logo_date.png"/></div>
+                    <div><img src="./img/home-bg.jpg"/></div>
+                    <div><img src="./img/home-bg2.jpg"/></div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-row box-bg lunbo-textbox">
+            <a href="Life.html" class="font-size2 font-color1 cursor-pointer">每个强者都会有背后的辛酸挫折</a>
+        </div>
+
+        <div class="three-pane-box layui-row layui-col-space20">
+            <div class="layui-col-md4">
+                <div class="col-nei-div cursor-pointer pane-radius">
+                    <img src="img/home-bg4.png"/>
+                </div>
+                <div class="item-text-div bottom-radius layui-elip">
+                    <a href="Life.html" class="cursor-pointer">每个强者都会有背后的辛酸挫折</a>
+                </div>
+            </div>
+            <div class="layui-col-md4">
+                <div class="col-nei-div cursor-pointer pane-radius">
+                    <img src="img/carousel2.jpg"/>
+                </div>
+                <div class="item-text-div bottom-radius layui-elip">
+                    <a href="#" class="cursor-pointer">之所以洒脱，是因为懂得取舍</a>
+                </div>
+            </div>
+            <div class="layui-col-md4">
+                <div class="col-nei-div cursor-pointer pane-radius">
+                    <img src="img/home-bg2.jpg"/>
+                </div>
+                <div class="item-text-div bottom-radius layui-elip">
+                    <a href="#" class="cursor-pointer">弱水三千只取一瓢</a>
+                </div>
+            </div>
+        </div>
+        <div class="one-sharetype-box layui-row box-bg">
+            <div class="layui-col-md5">
+                <div class="item-img-box">
+                    <img src="img/home-bg2.jpg"/>
+                </div>
+            </div>
+            <div class="oneshare-content layui-col-md7">
+                {% for post in paginator.posts limit:1 %}
+                <h3 class="font-bold2 font-size3 font-color4 layui-elip">{{ post.title }}</h3>
+                <div class="oneshare-msg-row layui-row font-color3 font-size1">
+                    <p>
+                        {{ post.subtitle }}
+                    </p>
+
+                </div>
+                <div class="look-more layui-row">
+                    <a href="#" class="layui-btn layui-btn-sm pane-radius subject-color">查看更多</a>
+                    <a href="#" class="layui-btn layui-btn-sm layui-btn-normal pane-radius">免费获取</a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="type-module layui-row layui-col-space20">
+            {% for category in site.categories %}
+            <div class="layui-col-md6">
+                <div class="type-module-item layui-row">
+                    <div class="item-title-row layui-row row-align">
+                        <div class="layui-col-md10 row-align font-size2">
+                            <div class="left-icon"></div>
+                            <span class="font-bold" style="margin-left: 5px;">{{ category.first }}</span>
+                        </div>
+                        <div class="layui-col-md2 text-align-right text-underline only-pointer font-size1 font-color3">
+                            <a href="{{ category.first | prepend: "./category/" }}.html">更多</a>
+                        </div>
+                    </div>
+                    <div class="item-ul-row layui-row">
+                        <ul>
+                            {% for post in category.last limit:5 %}
+                            <li>
+                                <div class="ul-li-div layui-row row-align">
+                                    <div class="layui-col-md9 layui-elip font-size2">&gt; &nbsp;<a href="{{ post.url }}">{{ post.title}}</a></div>
+                                    <div class="layui-col-md3 text-align-right font-size1 font-color3">{{ post.date | date:"%Y-%m-%d"}}</div>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="zonhe-row layui-row">
+            <div class="item-title-row layui-row row-align">
+                <div class="layui-col-md10 row-align font-size2">
+                    <div class="left-icon"></div>
+                    <span class="font-bold" style="margin-left: 5px;">综合文章</span>
+                </div>
+            </div>
+            <div class="zonhe-ul-row layui-row">
+                <ul>
+                    <li>
+                        <div class="zonhe-libox layui-row subject-second-color pane-radius">
+                            <div class="zonheimg-box-parent layui-col-md3">
+                                <div class="zonhe-li-imgbox pane-radius">
+                                    <img src="img/carousel2.jpg"/>
+                                    <div class="lable-box">程序人生</div>
+                                </div>
+                            </div>
+                            <div class="zonheimg-box-parent2 layui-col-md9">
+                                <div class="zonhe-lititle layui-row layui-elip">
+                                    <h3><a href="#">每个强者都会有背后的辛酸挫折每个强者都会有背后的辛酸挫折</a></h3>
+                                </div>
+                                <div class="zonhe-limsg layui-row">
+                                    <p> Windows 10将会让搜索和使用信息更加简单，包括本地、网络和互联网搜索功能,直观的用户体验将更
+                                        加高级,还会整合自动化应用程序提交和交叉程序数据透明性。 Windows 10
+                                        操作系统改进了基于角色的计算方案和用户账户管理,在数据保护和坚固协作的固有冲突之方案和用户账户管理,在数据保护和坚固协作的固有冲间搭建沟通桥梁,同时也会开启企业级的数据保护和权</p>
+                                </div>
+                                <div class="zonhe-param layui-row">
+                                    发布时间：2019-01-15<span><a href="#">大BUG</a></span><span>【<a href="#">程序人生</a>】</span><span><a href="#">查看全文</a></span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="look-more layui-row subject-second-color font-color1 text-align-center pane-radius"><a href="#">查看更多</a></div>
+            </div>
+        </div>
+    </div>
+    <div class="item-right">
+      {% include info.html %}
+        <div class="sharetype-list-box box-bg">
+            <div class="pane-title layui-row row-align">
+                <img src="img/icons/lingxing.png">
+                <span>最新文章</span>
+            </div>
+            <ul>
+                {% for post in paginator.posts limit:10 %}
+                <li class="list-item layui-row layui-elip"><a href="{{ post.url }}">{{ post.title}} {{ post.date | date:"%Y-%m-%d"}}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="sharetype-list-box box-bg">
+            <div class="pane-title layui-row row-align">
+                <img src="img/icons/lingxing.png">
+                <span>博客信息</span>
+            </div>
+            <div class="web-msg">博客站点更多信息请查看<a href="#">关于博客</a></div>
+        </div>
+    </div>
 </div>
-<hr>
-{% endfor %}
 
-<!-- Pager -->
-{% if paginator.total_pages > 1 %}
-<ul class="pager">
-    {% if paginator.previous_page %}
-    <li class="previous">
-        <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr; 上一页</a>
-    </li>
-    {% endif %}
-    {% if paginator.next_page %}
-    <li class="next">
-        <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}"> 下一页 &rarr;</a>
-    </li>
-    {% endif %}
-</ul>
-{% endif %}
 
+<script>
+    layui.use(['carousel','jquery','layer'], function(){
+        var carousel = layui.carousel;
+        var $=layui.$;
+        var layer=layui.layer;
+        //建造实例
+        carousel.render({
+            elem:'#my-carousel',
+            width:'100%',
+            height:'300px',
+            anim:'fade',
+            interval:5000
+
+        });
+        //监听轮播切换事件
+        var carouselTextArr=[
+            '每个强者都会有背后的辛酸挫折',
+            '之所以洒脱，是因为懂得取舍',
+            '弱者，任思想控制行为，强者，让行为控制思想',
+            '弱水三千只取一瓢',
+            '随图片轮播切换的文字'
+        ];
+        carousel.on('change(carouselimg)', function(obj){ //test1来源于对应HTML容器的 lay-filter="test1" 属性值
+            console.log(obj.index); //当前条目的索引
+            console.log(obj.prevIndex); //上一个条目的索引
+            console.log(obj.item); //当前条目的元素对象
+            $(".lunbo-textbox a").text(carouselTextArr[obj.index]);
+        });
+    });
+</script>

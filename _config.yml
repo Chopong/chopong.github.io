@@ -1,21 +1,23 @@
 # Site settings
-title: Chopong's Blog
+title: "半路出家"
 name: 维尔斯特拉斯
 email: weisp.pku@gmail.com
-description: "So we beat on, boats against the current, borne back ceaselessly into the past."
 header-img: img/home-bg.jpg
-logo: img/logos/GNU-icon.png
+description: "So we beat on, boats against the current, borne back ceaselessly into the past."
+logo: img/logos/v4.png
 avatar: img/article/demo.png
 comment: livere
 baidu-analytics: true
-url: "https://chopong.github.io"
+#url: "http://127.0.0.1:4000/"
+#url: "https://chopong.github.io"
 baseurl: ""
-bio: "东拼西凑搞了一个博客, 门外汉, 不懂html, 纯粹自己搞着玩! 
-之前装过debian系的几个系统, debian/ubuntu/kali, 后来在一次meta培训课上认识了一个首医的哥们儿, 他说Deepin做的还不错, 后来继续读书也没怎么在意这个东西, 再后来因为一些原因退学了, 现在重新搞一搞当时想搞但没搞成的事情."
-status: "中关村文理学院●情怀批发部 <br> 硕士退学生"
+bio: "东拼西凑搞了一个博客, 门外汉, 纯粹自己搞着玩! 
+之前装过debian系的几个系统, debian/ubuntu/kali, 后来在一次meta培训课上认识了一个首医的哥们儿, 他说Deepin做的还不错, 后来继续读书也没怎么在意这个东西, 当时想搞但没搞成的事情."
+status: "中关村文理学院●情怀批发部"
+
 
 # SNS settings
-wechat_username: WeiSP1997
+wechat_username: chopong_pku
 wechat_QR: img/article/demo.png
 qq_username: 842071968
 qq_QR: img/article/demo.png
@@ -31,7 +33,7 @@ rss: true
 plugins: [jekyll-paginate, jekyll-sitemap, jekyll-seo-tag]
 markdown: kramdown
 kramdown:
-  input: GFM                    
+  input: GFM
   syntax_highlighter_opts:
     span:
       line_numbers: false
@@ -40,12 +42,14 @@ kramdown:
       start_line: #1
 
 highlighter: rouge
-permalink: pretty
-paginate: 10
-exclude: ["node_modules","Gruntfile.js","package.json","README.md"]
+permalink: /:title.html
 
+#permalink: /:categories/:year/:month/:title.html
+defaults:
+  - values:
+      layout: "default"
 
-sidebar: true              
-sidebar-about-description: "艺术就是爆炸"
-sidebar-avatar: /img/article/demo.png
-
+paginate: 15
+paginate_path: /page:num/
+exclude: ["node_modules","package.json","README.md"]
+# ------------ CONFIGURABLE END ------------

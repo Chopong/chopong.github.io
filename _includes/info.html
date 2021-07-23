@@ -1,0 +1,60 @@
+    <div class="item-right">
+        <div class="right-one-row layui-row pane-bg-radius">
+            <div class="visit-img-box top-radius">
+                <img src="{{site.baseurl}}/sundry/logo/v1.png" class="top-radius"/>
+            </div>
+            <div class="headimg-box">
+                <img src="{{site.baseurl}}/sundry/logo/logo.png" align="middle"/>
+            </div>
+            <div class="nickname layui-row row-align text-align-center">
+                半路出家
+                <span><i class="fa fas fa-male"></i></span>
+            </div>
+            <div class="padding-hr layui-row common-padding-x">
+                <div class="hr-line-div"></div>
+            </div>
+            <div class="mine-msg layui-row common-padding font-size1 font-color5">
+                <div class="layui-row row-align">
+                    <div class="msg-name layui-col-md3">Q Q ：</div>
+                    <div class="msg-val layui-col-md9">842071968</div>
+                </div>
+                <div class="layui-row row-align">
+                    <div class="msg-name layui-col-md3">职业 ：</div>
+                    <div class="msg-val layui-col-md9">在校学生</div>
+                </div>
+                <div class="layui-row row-align">
+                    <div class="msg-name layui-col-md3">现居 ：</div>
+                    <div class="msg-val layui-col-md9">安徽省-合肥市</div>
+                </div>
+                <div class="layui-row row-align">
+                    <div class="msg-name layui-col-md3">Email ：</div>
+                    <div class="msg-val layui-col-md9">chopong@qq.com</div>
+                </div>
+                <div class="layui-row row-align">
+                    <div class="msg-name layui-col-md3">工作室 ：</div>
+                    <div class="msg-val layui-col-md9">聚繁 (网站、APP、微信开发)</div>
+                </div>
+            </div>
+            <div class="row-hr layui-row">
+                <div class="row-hr-line-div"></div>
+            </div>
+            {% assign count = 0 %}
+            {% assign count_article =0 %}
+            {% for post in site.posts %}
+                {% assign single_count = post.content | strip_html | strip_newlines | remove: " " | size %}
+                {% assign count = count | plus: single_count %}
+                {% assign count_article = count_article | plus: 1%}
+            {% endfor %}
+            <div class="number-box layui-row common-padding-x bottom-radius text-align-center">
+                <div class="number-col-div layui-col-md3">
+                    <div class="layui-row param-number font-bold font-color1 font-size2">{{ count_article }}</div>
+                    <div class="layui-row param-name font-color1 font-size1">博文</div>
+                </div>
+
+                <div class="number-col-div layui-col-md3">
+                    <div class="layui-row param-number font-bold font-color1 font-size2">{{ count | divided_by: 1000.0 | round: 2}} k </div>
+                    <div class="layui-row param-name font-color1 font-size1">文字</div>
+                </div>
+
+            </div>
+        </div>
