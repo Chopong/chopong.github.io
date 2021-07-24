@@ -51,7 +51,6 @@ hr.small {
   border-color: #FFFFFF;
 }
 .navbar-custom {
-  background: white;
   position: absolute;
   top: 0;
   left: 0;
@@ -108,8 +107,8 @@ hr.small {
     /* when the user scrolls down, we hide the header right above the viewport */
     position: fixed;
     top: -61px;
-    background-color: rgba(255, 255, 255, 0.5);
-    border-bottom: 1px solid #f2f2f2;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-bottom: 1px solid #574a4a;
     -webkit-transition: -webkit-transform 0.3s;
     -moz-transition: -moz-transform 0.3s;
     transition: transform 0.3s;
@@ -120,9 +119,6 @@ hr.small {
   .navbar-custom.is-fixed .navbar-brand:hover,
   .navbar-custom.is-fixed .navbar-brand:focus {
     color: #0085a1;
-  }
-  .navbar-custom.is-fixed .nav li a {
-    color: #404040;
   }
   .navbar-custom.is-fixed .nav li a:hover,
   .navbar-custom.is-fixed .nav li a:focus {
