@@ -1,30 +1,54 @@
-<!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="{{ site.baseurl }}/homepage.html"><img src="{{site.baseurl}}/img/logos/v1alt.png" height="30px" /></a>
+<div class="navbar-wrapper">
+  <div class="container">
+    <nav class="navbar navbar-inverse navbar-static-top">
+      <div class="container">
+        <a class="navbar-brand" href="{{ site.baseurl }}/homepage.html"><img src="{{site.baseurl}}/img/logos/v1alt.png" height="30px" /></a>
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
         </div>
+        <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
+          <ul class="nav navbar-nav">
+            <li>
+              <a href="{{ site.baseurl }}/">博客主页</a>
+            </li>
+            {% for category in site.categories %}
+            <li><a href="{{site.baseurl}}/category/{{ category | first }}.html">{{ category | first }}</a></li>
+            {% endfor %}
+            <li><a id="cb-search-btn" title="双击Ctrl试一下" onclick="toc_toggle('cb-search-tool')">文章搜索</a></li>
+            <!--  <li class="active"><a href="#">Home</a></li>
+                  <li><a href="#">About</a></li>
+                  <li><a href="#">Contact</a></li>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li role="separator" class="divider"></li>
+                      <li class="dropdown-header">Nav header</li>
+                      <li><a href="#">Separated link</a></li>
+                      <li><a href="#">One more separated link</a></li>
+                      </ul>
+                  </li> -->
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+  </div>
+</div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="{{ site.baseurl }}/">博客主页</a>
-                </li>
+<div class="cb-search-tool" id="cb-search-tool" style="display: none;">
+  <input type="text" class="form-control cb-search-content" id="cb-search-content"  placeholder="文章标题 日期 标签" >
+  <div id="cb-close-btn"></div>
+</div>
 
-                {% for category in site.categories %}
-                        <li><a href="{{site.baseurl}}/category/{{ category | first }}.html">{{ category | first }}</a></li>
-                        {% endfor %}
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container -->
-</nav>
+<div>
+  <a id="back_to_top" href="#top">
+    <i class="fa fa-arrow-up fa-2x"></i>
+  </a>
+</div>

@@ -1,7 +1,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
   <meta name="description" content="{{ site.description }}">
   <link rel='shortcut icon' type='image/png' href='{{ site.baseurl }}/sundry/logo/favicon.ico' />
   <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}" />
@@ -11,40 +11,48 @@
   <meta property="og:image" content="{{ site.url }}{{ site.sidebar-avatar }}">
   <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+
+ <!-- jQuery -->
+ <script src="{{"/sundry/js/jquery.js" | prepend: site.baseurl | prepend: site.url }}"></script>
+ <script src="{{ "/sundry/js/typed.js" | prepend: site.baseurl | prepend: site.url }}"></script>
+
   <!-- Bootstrap Core CSS -->
-  <link rel="stylesheet" href="{{ "/sundry/css/bootstrap.min.css" | prepend: site.baseurl | prepend: site.url }}">
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="{{ "/sundry/css/clean-blog.css" | prepend: site.baseurl | prepend: site.url }}">
+  <link rel="stylesheet" type="text/css" href="{{ "/sundry/css/bootstrap.css" | prepend: site.baseurl | prepend: site.url }}" />
+  <script src="{{ "/sundry/js/bootstrap.js" | prepend: site.baseurl | prepend: site.url }}"></script>
+<!-- Bootstrap End-->
+
   <!-- Adjust Colors -->
   <link rel="stylesheet" href="{{ "/sundry/colorscheme.scss" | prepend: site.baseurl | prepend: site.url }}">
-  <!-- Pygments Github CSS -->
-  <link rel="stylesheet" href="{{ "/sundry/css/syntax.css" | prepend: site.baseurl | prepend: site.url }}">
-  <link rel="stylesheet" href="{{ "/sundry/sidebar.less" | prepend: site.baseurl | prepend: site.url }}">
-  <link rel="stylesheet" type="text/css" href="{{ "/sundry/css/bootstrap.min.css" | prepend: site.baseurl | prepend: site.url }}" />
-  <link rel="stylesheet" type="text/css" href="{{ "/sundry/css/stylesheet.css" | prepend: site.baseurl | prepend: site.url }}" />
-  <link rel="stylesheet" type="text/css" id="color-switcher" href="{{ "/sundry/css/jade.css" | prepend: site.baseurl | prepend: site.url }}" />
+
   <!-- Custom Fonts -->
   <link href="{{ "/sundry/font/font-awesome/css/font-awesome.min.css" | prepend: site.baseurl | prepend: site.url }}" rel="stylesheet" type="text/css">
   <link href="{{ "/sundry/css/googlelora.css" | prepend: site.baseurl | prepend: site.url }}" rel='stylesheet' type='text/css'>
   <link href="{{ "/sundry/css/googleopensans.css" | prepend: site.baseurl | prepend: site.url }}" rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="{{ "/sundry/css/layui/css/layui.css" | prepend: site.baseurl | prepend: site.url }}">
-  <link rel="stylesheet" href="{{ "/sundry/css/common.css" | prepend: site.baseurl | prepend: site.url }}">
+
   <!-- Math Jax -->
   <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
   <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/x-mathjax-config"> MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
-  <!-- jQuery -->
-  <script src="/sundry/js/jquery-3.4.0.min.js"></script>
-  <!-- Bootstrap Core JavaScript -->
-  <script src="/sundry/js/bootstrap.bundle.min.js"></script>
-  <script src="/sundry/css/layui/layui.js"></script>
+
+ 
   <!-- JavaScript -->
-  <script src="{{ "sundry/js/jquery.min.js" | prepend: site.baseurl | prepend: site.url }}"></script>
-  <script src="{{ "sundry/js/typed.min.js" | prepend: site.baseurl | prepend: site.url }}"></script>
-  <script src="{{ "sundry/js/custom-jquery.js" | prepend: site.baseurl | prepend: site.url }}"></script>
-  <script src="{{ "sundry/font/font-awesome/css/font-awesome.min.css" | prepend: site.baseurl | prepend: site.url }}"></script>
+  
+  
   <!-- Custom Theme JavaScript -->
-  <script src="{{ "/sundry/js/clean-blog.min.js " | prepend: site.baseurl | prepend: site.url }}"></script>
+  <script src="{{ "/sundry/js/clean-blog.js " | prepend: site.baseurl | prepend: site.url }}"></script>
+
+   <!-- Custom CSS -->
+  <link rel="stylesheet" href="{{ "/sundry/css/clean-blog.css" | prepend: site.baseurl | prepend: site.url }}">
+
+
+  <!-- Custom chopong js  -->
+  <script src="{{ "/sundry/js/chopong.js" | prepend: site.baseurl | prepend: site.url }}"></script>
+  <link rel="stylesheet" href="{{ "/sundry/css/chopong.css" | prepend: site.baseurl | prepend: site.url }}">
+
+   <!-- Custom search plugin  -->
+  <link rel="stylesheet" href="{{ "/plugins/search/cb-search.css" | prepend: site.baseurl }}">
+  <script src="{{ "/plugins/search/bootstrap3-typeahead.min.js" | prepend: site.baseurl }}"></script>
+  <script src="{{ "/plugins/search/cb-search.js" | prepend: site.baseurl }}"></script>
   {% seo %}
   {% include analytics.html %}
 </head>

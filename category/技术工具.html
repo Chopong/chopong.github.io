@@ -1,105 +1,132 @@
 ---
-layout: empty
+layout: default
 ---
-<header class="intro-header" style="background-image: url('../img/home-bg2.jpg');">
+
+<!-- 每个标签文章输出数量 -->
+{% assign article_num_per_block = 5 %}
+{% assign head_img = "../img/background/tech-1.png"%}
+{% assign article_category = "技术工具" %}
+{% assign tag_cloud_count_default = 2 %}
+<!-- 页面配置结束 -->
+
+<header class="intro-header" style="background-image: url({{ head_img }});">
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div class="post-heading" style="padding: 100px 0">
-         {% include nav.html %}
+        <div class="post-heading" style="padding: 80px 0">
+          <h1>{{article_category}}</h1>
         </div>
       </div>
     </div>
   </div>
 </header>
 
-{% assign groups = site.posts | where: 'categories', '技术工具' %}
-
+{% assign groups = site.posts | where: 'categories', article_category %}
 {% for post in groups %}
-     {% assign tags = tags |concat: post.tags |uniq %}
+     {% assign tags = tags | concat: post.tags | uniq %}
 {% endfor %}
 
-<div class="main-content item-box">
-    <div class="item-left">
-        <div class="type-module layui-row layui-col-space20">
+{% assign tag_string = "" %}
+{% assign max_tag_count = 0 %}
+{% for tag in tags %}
+  {% assign tag_count = 0%}
+  {% for post in groups %}
+    {% if post.tags contains tag %}
+      {% assign tag_count = tag_count | plus: 1%}
+    {% endif %}
+  {% endfor %}
+  {% assign tag_string = tag_string | append: "," | append: tag_count %}
+  {% assign max_tag_count = tag_count | at_least: max_tag_count | times: 1.0 %}
+{% endfor %}
+ <!-- 产生一个以 空白 开头的数组 -->
 
-            {% for tag in tags %}
-            <div class="layui-col-md6">
-                <div class="type-module-item layui-row">
-                    <div class="item-title-row layui-row row-align">
-                        <div class="layui-col-md10 row-align font-size2">
-                            <div class="left-icon"></div>
-                            <span class="font-bold" style="margin-left: 5px;">{{- tag -}}</span>
-                        </div>
-                        <div class="layui-col-md2 text-align-right text-underline only-pointer font-size1 font-color3">
-                            <a href="#">更多</a>
-                        </div>
-                    </div>
-                    <div class="item-ul-row layui-row">
-                      <ul>
-                         {% assign ncount = 0 %}
-                            {% for post in groups %}
-                        {% if post.tags contains tag and ncount < 5 %}
-                                                                  {% assign ncount = ncount | plus: 1 %}
-                            <li>
-                                <div class="ul-li-div layui-row row-align">
-                                    <div class="layui-col-md9 layui-elip font-size2">&gt; &nbsp;<a href="{{ post.url }}">{{- post.title -}}</a>
-                                    </div>
-                                    <div class="layui-col-md3 text-align-right font-size1 font-color3">{{ post.date | date:"%Y-%m-%d"}}</div>
-                                </div>
-                            </li>
-                                {% endif %}
-                            {% endfor %}
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-        <div class="zonhe-row layui-row">
-            <div class="item-title-row layui-row row-align">
-                <div class="layui-col-md10 row-align font-size2">
-                    <div class="left-icon"></div>
-                    <span class="font-bold" style="margin-left: 5px;">标签</span>
-                </div>
-            </div>
-            <div class="zonhe-ul-row layui-row">
-                {% for tag in tags %}
-                    {% for post in groups %}
-                        {% if post.tags contains tag %}
-                            {% assign count = tag | size %}
-                            {% assign fontsize = count | times: 4 %}
-                       {% endif %}
-                    {% endfor %}
-                    {% if count  > 4 %}
-                            <a class="post-tags-item" href="{{ page.url }}?keyword={{ tag }}"
-                            title="{{ tag }}" data-count="{{ count }}"
-                            style="font-size: {% if fontsize > 48 %} 48px {% else %}{{ fontsize }}px {% endif %};">{{ tag }}</a>
+{% assign tag_values = tag_string | split: ',' %}
 
-                    {% endif %}
-                {% endfor %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-2 content-box .col-xs-12 .col-sm-6">
+      <div class="row">
+        {% assign tag_c = 0 %}
+        {% for tag in tags %}
+        {% assign tag_c = tag_c | plus: 1 %}
+        {% assign ncount = tag_values[tag_c] | abs %}
+        {% if ncount >= article_num_per_block %}
+        <div class="col-md-6 items-box .col-xs-12 .col-sm-6">
+          <div class="row item-title-line">
+            <div class="col-md-9 item-title .col-xs-12 .col-sm-6">
+              <i class="fa fa-book" style="margin-right: .3em;"></i><span class="font-bold">{{- tag -}}</span>
+            </div>
+            <div class="col-md-3 item-title-info .col-xs-6 .col-sm-4">
+              <a href="">更多</a>
+            </div>
+          </div>
+          {% assign a_count = 0 %}
+          {% for post in groups %}
+          {% if post.tags contains tag %}
+          {% assign a_count = a_count | plus: 1 %}
+          {% if a_count <= article_num_per_block %} <div class="row item-ul-line">
+            <div class="col-md-9 item-ul-list .col-xs-12 .col-sm-6">
+              <a href="{{ post.url }}"><i class="fa far fa-hand-o-right" style="margin-right: .3em;"></i>{{- post.title
+                -}}</a>
+            </div>
+            <div class="col-md-3 item-ul-date .col-xs-6 .col-sm-4">{{ post.date | date:"%Y-%m-%d"}}
             </div>
         </div>
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+      </div>
+      {% endif %}
+      {% endfor %}
     </div>
-    <div class="item-right">
-       {% include info.html %}
-        <div class="sharetype-list-box box-bg">
-            <div class="pane-title layui-row row-align">
-                <img src="../img/icons/lingxing.png">
-                <span>最新文章</span>
-            </div>
-            <ul>
-                {% for post in groups limit:10 %}
-                <li class="list-item layui-row layui-elip"><a href="{{ post.url }}">{{ post.title}} {{ post.date | date:"%Y-%m-%d"}}</a></li>
-                {% endfor %}
-            </ul>
+  </div>
+  <div class="col-md-3 extra-box">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        {% include info.html %}
+      </div>
+      <div class="col-md-10 col-md-offset-1 recent-article-box">
+        <div class="row recent-article-box-title-line">
+          <div class="col-md-9 recent-article-box-title">
+            <i class="fa fa-book" style="margin-right: .3em;"></i><span class="font-bold">最新文章</span>
+          </div>
+          <div class="col-md-3 recent-article-box-title-info .col-xs-6 .col-sm-4">
+            <a href="#">+</a>
+          </div>
         </div>
-        <div class="sharetype-list-box box-bg">
-            <div class="pane-title layui-row row-align">
-                <img src="../img/icons/lingxing.png">
-                <span>博客信息</span>
-            </div>
-            <div class="web-msg">博客站点更多信息请查看 {{page.tags }}<a href="#">关于博客</a></div>
+        {% for post in site.posts limit:5 %}
+        <div class="row item-ul-line">
+          <div class="col-md-9 item-ul-list .col-xs-12 .col-sm-6">
+            <a href="{{ post.url }}"><i class="fa far fa-hand-o-right" style="margin-right: .3em;"></i>{{
+              post.title}}</a>
+          </div>
+          <div class="col-md-3 item-ul-date .col-xs-6 .col-sm-4">{{ post.date | date:"%Y-%m-%d"}}</div>
         </div>
+
+        {% endfor %}
+      </div>
+      <div class="col-md-10 col-md-offset-1 archived-box">
+        <div class="row">
+          {% assign tag_cloud_count = 0 %}
+          {% for tag in tags %}
+          {% assign tag_cloud_count = tag_cloud_count | plus: 1 %}
+          {% assign tag_value = tag_values[tag_cloud_count] | abs %}
+
+          {% if tag_value >= tag_cloud_count_default %}
+          <div class="col-md-3 cloud-tags">
+            {% assign tag_per = tag_value | divided_by: max_tag_count %}
+            {% assign tag_per_reverse = 1 | minus: tag_per %}
+            {% assign tag_per_color = max_tag_count | minus: tag_value | divided_by: max_tag_count | times: 255 %}
+              <div class="post-tags-item" href="" style="background-color:rgb(0,0,0,{{ tag_per }})">
+                  <span class="tag_cloud_num" style="background-color:rgb(255,142,0,{{ tag_per }})" >{{- tag_value -}}</span>
+                  <span class="tag_cloud_tag" >{{- tag -}}</span>
+              </div>
+          </div>
+          {% endif %}
+          {% endfor %}
+        </div>
+      </div>
     </div>
+  </div>
 </div>
+

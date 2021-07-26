@@ -18,23 +18,28 @@ layout: default
   </div>
 </header>
 
+<div id="cp-progress"></div>
+
 <!-- Post Content -->
 {% include imagezoom.html %}
+
 <article>
   <div id="content" class="container">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        {{ content | markdownify }}
+          {{ content | markdownify }}
         <hr>
         <ul class="pager">
           {% if page.previous.url %}
           <li class="previous">
-            <a href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.previous.title}}">&larr; Previous Post</a>
+            <a href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip"
+              data-placement="top" title="{{page.previous.title}}">&larr; Previous Post</a>
           </li>
           {% endif %}
           {% if page.next.url %}
           <li class="next">
-            <a href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.next.title}}">Next Post &rarr;</a>
+            <a href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip"
+              data-placement="top" title="{{page.next.title}}">Next Post &rarr;</a>
           </li>
           {% endif %}
         </ul>
@@ -42,6 +47,24 @@ layout: default
     </div>
   </div>
 </article>
+
+
+<div class="toc_button"  onclick="toc_toggle('markdown-toc')">
+  <i class="fa fa-bars fa-2x"></i>
+</div>
+
+
+
 <hr>
 {% include comments.html %}
 <hr>
+<!--
+<script src="./sundry/js/md-toc.js"></script>
+<script type="text/javascript">
+  new Toc( 'posttoc',{
+      'level':3,
+      'top':200,
+      'class':'toc',
+      'targetId':'toc'
+  } );
+</script>-->
