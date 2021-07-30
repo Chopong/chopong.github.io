@@ -1,9 +1,9 @@
-<div class="row info-box">
+<div class="info-box">
     <div class="visit-img-box">
-        <img src="{{site.baseurl}}/sundry/logo/v1.png" />
+        <img src="{{site.baseurl}}/assets/logo/v1.png" />
     </div>
-    <div class="headimg-box">
-        <img src="{{site.baseurl}}/sundry/logo/logo.png" style="text-align: center;" />
+    <div class="headimg-box" style="text-align: center;">
+        <img src="{{site.baseurl}}/assets/logo/logo.png" />
     </div>
     <div class="nickname" style="text-align: center;">
         半路出家
@@ -11,24 +11,23 @@
 
     <hr>
     <div class="mine-msg font-size1">
-        <div class="row">
-            <div class="msg-name col-md-4 cp-right">Q Q</div>
-            <div class="msg-val col-md-8 cp-left">842071968</div>
+        <div class="row row-cols-2">
+            <div class="col-4 msg-name">Q Q</div>
+            <div class="col-8 msg-val">842071968</div>
         </div>
-        <div class="row">
-            <div class="msg-name col-md-4 cp-right">职业</div>
-            <div class="msg-val col-md-8 cp-left">在校学生</div>
+        <div class="row row-cols-2">
+            <div class="col-4 msg-name">职业</div>
+            <div class="col-8 msg-val">在校学生</div>
         </div>
-        <div class="row">
-            <div class="msg-name col-md-4 cp-right">现居</div>
-            <div class="msg-val col-md-8 cp-left">安徽省-合肥市</div>
+        <div class="row row-cols-2">
+            <div class="col-4 msg-name">现居</div>
+            <div class="col-8 msg-val">安徽省-合肥市</div>
         </div>
-        <div class="row">
-            <div class="msg-name col-md-4 cp-right">邮件</div>
-            <div class="msg-val col-md-8 cp-left">chopong@qq.com</div>
+        <div class="row row-cols-2">
+            <div class="col-4 msg-name">邮件</div>
+            <div class="col-8 msg-val">chopong@qq.com</div>
         </div>
     </div>
-
     {% assign count = 0 %}
     {% assign count_article =0 %}
     {% for post in site.posts %}
@@ -40,15 +39,13 @@
 
     <div class="cal-box">
         <div class="row">
-            <div class="col-md-6 number-col-div">
-                <div class="row">{{ count_article }}</div>
-                <div class="row">博文</div>
+            <div class="col-6 row-cols-2 number-col-div">
+                {{ count_article }}<br>博文
             </div>
     
-            <div class="col-md-6 number-col-div">
-                <div class="row">{{ count | divided_by: 1000.0 | round:
-                    2}} k </div>
-                <div class="row">文字</div>
+            <div class="col-6 row-cols-2 number-col-div">
+                {{ count | divided_by: 1000.0 | round:
+                    2}} <br>文字
             </div>
         </div>
     </div>

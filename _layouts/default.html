@@ -3,10 +3,16 @@
 
 {% include head.html %}
 
-<body>
+<body data-spy="scroll" data-target="#navbar-toc" data-offset="0" style="position: relative;"> <!-- onselectstart="return false"-->
 
 {% include nav.html %}
 
+<div>
+   <a id="back_to_top" href="#top">
+     <i class="fa fa-arrow-up fa-2x"></i>
+   </a>
+ </div>
+ 
    {{ content }}
 
 {% include footer.html %} 

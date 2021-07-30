@@ -1,94 +1,100 @@
 ---
 layout: none
+article_num_per_block: 10
+tag_cloud_count_default: 5
+recent_articles_num: 10
+
+carousel_slide_num: 5
+carousel_categories_default:
+
 ---
+
+<!---
+配置开始
+----->
+{% assign article_num_per_block = page.article_num_per_block | default: 5 %}
+{% assign tag_cloud_count_default = page.tag_cloud_count_default | default: 3 %}
+{% assign recent_articles_num = page.recent_articles_num | default: 10 %}
+{% assign carousel_categories = page.carousel_categories_default %}
 
 {% include head.html %}
 
+
 {% include nav.html %}
 
+
+
+{% assign groups = site.posts %}
+{% for post in groups %}
+     {% assign tags = tags | concat: post.tags | uniq %}
+{% endfor %}
+
+
+{% assign tag_string = "" %}
+{% assign max_tag_count = 0 %}
+{% for tag in tags %}
+  {% assign tag_count = 0%}
+  {% for post in groups %}
+    {% if post.tags contains tag %}
+      {% assign tag_count = tag_count | plus: 1%}
+    {% endif %}
+  {% endfor %}
+  {% assign tag_string = tag_string | append: "," | append: tag_count %}
+  {% assign max_tag_count = tag_count | at_least: max_tag_count | times: 1.0 %}
+{% endfor %}
+<!-- 产生一个以 空白 开头的数组 -->
+{% assign tag_values = tag_string | split: ',' %}
+
+{% if carousel_categories %}
+    {% assign carousel_group = site.data.carouseldata | where: 'categories', carousel_categories %}
+  {% else %}
+    {% assign carousel_group = site.data.carouseldata %}
+{% endif %}
+{% assign carousel_num_minus_one = carousel_group | size | minus: 1 %}
+
+<div class="CarouselBox">
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
   <!-- Indicators -->
   <ol class="carousel-indicators">
-    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-    <li data-target="#myCarousel" data-slide-to="1" class=""></li>
-    <li data-target="#myCarousel" data-slide-to="2" class=""></li>
-    <li data-target="#myCarousel" data-slide-to="3" class=""></li>
-    <li data-target="#myCarousel" data-slide-to="4" class=""></li>
+    {% for car_num in (0..carousel_num_minus_one) %}
+      <li data-target="#myCarousel" data-slide-to="{{ car_num }}" class="{% if car_num == 0 %} active {% endif %}"></li> 
+    {% endfor %}
   </ol>
   <div class="carousel-inner" role="listbox">
-    <div class="item active">
-      <img class="first-slide" src="./img/background/home-bg4.png" alt="First slide">
-      <div class="container">
-        <div class="carousel-caption">
-          <h1>Example headline.</h1>
-          <p>Note: If you're viewing this page via a <code>file://</code> URL, the "next" and "previous" Glyphicon
-            buttons on the left and right might not load/display properly due to web browser security rules.</p>
-          <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
-        </div>
+    {% for car_num in (0..carousel_num_minus_one) reversed %}
+    <div class="carousel-item {% if car_num == carousel_num_minus_one %} active {% endif %}">
+      <img src="{{ carousel_group[car_num].background-img | default: "./img/background/home-bg2.jpg"}}">
+      <div class="carousel-caption d-none d-md-block">
+
+          <h1>{{- carousel_group[car_num].title -}}</h1>
+          <p> {{- carousel_group[car_num].subtitle -}}</p>
+          <p><a class="frontconbtn" href="{{ carousel_group[car_num].btn-url }}" role="button">
+            {{- carousel_group[car_num].btn-name | default: "Learn More" -}}
+          </a></p>
+      
       </div>
     </div>
-    <div class="item">
-      <img class="second-slide" src="./img/background/life-1.png" alt="Second slide">
-      <div class="container">
-        <div class="carousel-caption">
-          <h1>Another example headline.</h1>
-          <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget
-            metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-          <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
-        </div>
-      </div>
-    </div>
-    <div class="item">
-      <img class="third-slide" src="./img/background/tech-1.png" alt="Third slide">
-      <div class="container">
-        <div class="carousel-caption">
-          <h1>One more for good measure.</h1>
-          <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget
-            metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-          <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
-        </div>
-      </div>
-    </div>
-    <div class="item">
-      <img class="fourth-slide" src="./img/background/home-bg.png" alt="Fourth slide">
-      <div class="container">
-        <div class="carousel-caption">
-          <h1>One more for good measure.</h1>
-          <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget
-            metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-          <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
-        </div>
-      </div>
-    </div>
-    <div class="item">
-      <img class="five-slide" src="./img/background/home-bg2.jpg" alt="Five slide">
-      <div class="container">
-        <div class="carousel-caption">
-          <h1>One more for good measure.</h1>
-          <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget
-            metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-          <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
-        </div>
-      </div>
-    </div>
+    {% endfor %}
   </div>
-  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+  <div class="carousel-control-prev" type="button" data-target="#myCarousel"  data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="sr-only">Previous</span>
-  </a>
-  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+  </div>
+  <div class="carousel-control-next" type="button" data-target="#myCarousel"  data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
-  </a>
+  </div>
 </div>
+</div>
+
 
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-6 col-md-offset-2 content-box .col-xs-12 .col-sm-6">
+    <div class="col-md-6 offset-md-2 content-box .col-xs-12 .col-sm-6">
       <div class="row">
         {% for category in site.categories %}
         <div class="col-md-6 items-box .col-xs-12 .col-sm-6">
-          <div class="row item-title-line">
+          <div class="row row-cols-2 item-title-line">
             <div class="col-md-9 item-title .col-xs-12 .col-sm-6">
               <i class="fa fa-book" style="margin-right: .3em;"></i><span class="font-bold">{{ category.first }}</span>
             </div>
@@ -96,8 +102,8 @@ layout: none
               <a href="{{ category.first | prepend: "./category/" }}.html">更多</a>
             </div>
           </div>
-          {% for post in category.last limit:10 %}
-          <div class="row item-ul-line">
+          {% for post in category.last limit:article_num_per_block %}
+          <div class="row row-cols-2 item-ul-line">
             <div class="col-md-9 item-ul-list .col-xs-12 .col-sm-6">
               <a href="{{ post.url }}"><i class="fa far fa-hand-o-right" style="margin-right: .3em;"></i>{{ post.title}}</a>
             </div>
@@ -110,11 +116,13 @@ layout: none
     </div>
     <div class="col-md-3 extra-box">
       <div class="row">
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-10 offset-md-1">
           {% include info.html %}
         </div>
-        <div class="col-md-10 col-md-offset-1 recent-article-box">
-          <div class="row recent-article-box-title-line">
+      </div>
+      <div class="row">
+        <div class="col-md-10 offset-md-1 recent-article-box">
+          <div class="row row-cols-2 recent-article-box-title-line">
             <div class="col-md-9 recent-article-box-title">
               <i class="fa fa-book" style="margin-right: .3em;"></i><span class="font-bold">最新文章</span>
             </div>
@@ -122,23 +130,43 @@ layout: none
               <a href="#">+</a>
             </div>
           </div>
-          {% for post in site.posts limit:5 %}
-          <div class="row item-ul-line">
+          {% for post in site.posts limit:recent_articles_num %}
+          <div class="row row-cols-2 item-ul-line">
             <div class="col-md-9 item-ul-list .col-xs-12 .col-sm-6">
               <a href="{{ post.url }}"><i class="fa far fa-hand-o-right" style="margin-right: .3em;"></i>{{ post.title}}</a>
             </div>
             <div class="col-md-3 item-ul-date .col-xs-6 .col-sm-4">{{ post.date | date:"%Y-%m-%d"}}</div>
           </div>
           {% endfor %}
-    
         </div>
       </div>
-      <div class="col-md-10 col-md-offset-1 archived-box">
-    
+      <div class="row">
+        <div class="col-md-10 offset-md-1 archived-box">
+          <div class="row row-cols-4">
+            {% assign tag_cloud_count = 0 %}
+            {% for tag in tags %}
+            {% assign tag_cloud_count = tag_cloud_count | plus: 1 %}
+            {% assign tag_value = tag_values[tag_cloud_count] | abs %}
+            {% if tag_value >= tag_cloud_count_default %}
+            <div class="col-md-3 cloud-tags">
+              {% assign tag_per = tag_value | divided_by: max_tag_count %}
+              {% assign tag_per_reverse = 1 | minus: tag_per %}
+              {% assign tag_per_color = max_tag_count | minus: tag_value | divided_by: max_tag_count | times: 255 %}
+              <div class="post-tags-item" href="" style="background-color:rgb(0,0,0,{{ tag_per }})">
+                <span class="badge badge-left tag_cloud_num" style="background-color:rgb(255,142,0,{{ tag_per }})" >{{- tag_value -}}</span>
+                <span class="tag_cloud_tag" >{{- tag -}}</span>
+              </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+            <div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    </div>
-    </div>
+  </div>
 </div>
+
 
 {% include footer.html %}

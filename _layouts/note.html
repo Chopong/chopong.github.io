@@ -5,7 +5,7 @@ layout: default
 <header class="intro-header" style="background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}');">
   <div class="container">
     <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
         <div class="post-heading" style="padding: 30px 0">
           <h1>{{ page.title }}</h1>
           {% if page.subtitle %}
@@ -30,7 +30,7 @@ layout: default
 <article>
   <div id="content" class="container">
     <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
         {{ toc }}
         {{ content }}
         {% assign notebookadress = page.notebookfilename %}
@@ -54,8 +54,8 @@ layout: default
         {% endfor %}
         {% endcapture %}
         {% if page.visualworkflow == true %}
-        <script src="{{ site.baseurl }}/sundry/js/mermaid.min.js"></script>
-        <link rel="stylesheet" href="{{ site.baseurl }}/sundry/css/mermaid.forest.css">
+        <script src="{{ site.baseurl }}/assets/js/mermaid.min.js"></script>
+        <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/mermaid.forest.css">
         <script>mermaid.initialize({startOnLoad:true});</script>
         <!-- Get Content for This Post and Split at Pound Signs to Find Headers -->
         {% assign text = Notebook | newline_to_br | split:"#" %}

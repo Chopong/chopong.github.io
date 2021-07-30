@@ -1,0 +1,37 @@
+# Members
+
+- title: 测试的幻灯片1
+  subtitle: 测试用的文字1
+  img: 
+  background-img: https://img2.baidu.com/it/u=3676809931,4215012218&fm=224&fmt=auto&gp=0.jpg
+  btn-url: http://www.baidu.com/
+  btn-name: 去看看
+  categories: 生活随笔
+  visible: true
+
+- title: 测试的幻灯片2
+  subtitle: 测试用的文字2
+  img: 
+  background-img: /img/background/nevada.jpg
+  btn-url: http://www.baidu.com/
+  btn-name: 去看看
+  categories: 生活随笔
+  visible: true
+
+- title: 测试的幻灯片3
+  subtitle: 
+  img: 
+  background-img: /img/background/new-zealand.jpg
+  btn-url: http://www.baidu.com/
+  btn-name: 去看看
+  categories: 技术工具
+  visible: true
+
+- title: 测试的幻灯片4
+  subtitle: 
+  img: 
+  background-img: /img/background/malaysia.jpg
+  btn-url: http://www.baidu.com/
+  btn-name: 去看看
+  categories: 数学习题
+  visible: true

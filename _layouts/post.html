@@ -2,10 +2,10 @@
 layout: default
 ---
 <!-- Post Header -->
-<header class="intro-header" style="background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}');">
+<header class="intro-header" id="intro_bac" style="background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}');">
   <div class="container">
     <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
         <div class="post-heading" style="padding: 30px 0">
           <h1>{{ page.title }}</h1>
           {% if page.subtitle %}
@@ -26,9 +26,10 @@ layout: default
 <article>
   <div id="content" class="container">
     <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <div id="Chopong_TOC" class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
           {{ content | markdownify }}
-        <hr>
+          <hr>
+
         <ul class="pager">
           {% if page.previous.url %}
           <li class="previous">
@@ -49,22 +50,28 @@ layout: default
 </article>
 
 
-<div class="toc_button"  onclick="toc_toggle('markdown-toc')">
+      <aside id="Chopong_TOC_Position"></aside>
+
+
+<div class="toc_button"  onclick="toc_toggle('navbar-toc')">
   <i class="fa fa-bars fa-2x"></i>
 </div>
 
 
 
+
+
+
+<script src="{{ '/assets/js/chopong.js' | prepend: site.baseurl }}"> </script>
+
+<script type="text/javascript">
+  chopong_Toc('Chopong_TOC', {
+    'level': 6,
+    'targetId': 'Chopong_TOC_Position'
+  });
+
+</script>
+
 <hr>
 {% include comments.html %}
 <hr>
-<!--
-<script src="./sundry/js/md-toc.js"></script>
-<script type="text/javascript">
-  new Toc( 'posttoc',{
-      'level':3,
-      'top':200,
-      'class':'toc',
-      'targetId':'toc'
-  } );
-</script>-->

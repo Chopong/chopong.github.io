@@ -1,10 +1,10 @@
 main:
   - title: "Me"
-    url: /sundry/me/
+    url: /assets/me/
   - title: "Talks"
-    url: /sundry/talks/
+    url: /assets/talks/
   - title: "homepage"
-    url: /sundry/homepage/
+    url: /assets/homepage/
   - title: "Life"
     url: 
   - title: "Reading"

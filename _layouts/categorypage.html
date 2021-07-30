@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+{% include head.html %}
+
+<body>
+
+{% include nav.html %}
+
+<!-- 每个标签文章输出数量 -->
+{% assign article_category_title = page.article_category_title | default: "全部文章" %}
+{% assign article_category = page.article_category | default: site.categories %}
+{% assign head_img = page.head_img | default: "../img/background/home-bg2.jpg"%}
+{% assign article_num_per_block = page.article_num_per_block | default: 10 %}
+{% assign article_num_per_block_least = page.article_num_per_block_least | default: 2 %}
+{% assign recent_article_num = page.recent_article_num | default: 10 %}
+{% assign tag_cloud_count_default = page.tag_cloud_count_default | default: 2 %}
+<!-- 页面配置结束 -->
+
+   <header class="intro-header" style="background-image: url({{ head_img }});">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-10 offset-md-1">
+            <div class="post-heading" style="padding: 80px 0">
+              <h1>{{article_category_title}}</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    
+    {% assign groups = site.posts | where: 'categories', article_category %}
+    {% for post in groups %}
+         {% assign tags = tags | concat: post.tags | uniq %}
+    {% endfor %}
+    
+    {% assign tag_string = "" %}
+    {% assign max_tag_count = 0 %}
+    {% for tag in tags %}
+      {% assign tag_count = 0%}
+      {% for post in groups %}
+        {% if post.tags contains tag %}
+          {% assign tag_count = tag_count | plus: 1%}
+        {% endif %}
+      {% endfor %}
+      {% assign tag_string = tag_string | append: "," | append: tag_count %}
+      {% assign max_tag_count = tag_count | at_least: max_tag_count %}
+    {% endfor %}
+    
+     <!-- 产生一个以 空白 开头的数组 -->
+    {% assign tag_values = tag_string | split: ',' %}
+    
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6 offset-md-2 content-box .col-xs-12 .col-sm-6">
+          <div class="row">
+    
+            <!-- 寻找最大的盒子 -->
+            {% assign ok_box = 0 %}
+            {% for most_articles in (1..max_tag_count) reversed %}    
+    
+            <!-- 所有盒子 -->
+            {% assign tag_c = 0 %}
+            {% for tag in tags %}
+            {% assign tag_c = tag_c | plus: 1 %}
+            {% assign ncount = tag_values[tag_c] | abs %}
+            <!-- 找到符合条件的盒子 -->
+            {% if ncount >= article_num_per_block_least and ncount == most_articles %}
+            {% assign ok_box = ok_box | plus: 1 %}
+            <div class="col-md-6 items-box .col-xs-12 .col-sm-6">
+              <div class="row row-cols-2 item-title-line">
+                <div class="col-md-9 item-title .col-xs-12 .col-sm-6">
+                  <i class="fa fa-book" style="margin-right: .3em;"></i><span class="font-bold">{{- tag -}}</span>
+                </div>
+                <div class="col-md-3 item-title-info .col-xs-6 .col-sm-4">
+                  <a href="">更多</a>
+                </div>
+                
+              </div>
+              {% assign a_count = 0 %}
+              {% for post in groups %}
+              {% if post.tags contains tag %}
+              {% assign a_count = a_count | plus: 1 %}
+              {% if a_count <= article_num_per_block %} 
+              <div class="row row-cols-2 item-ul-line">
+                <div class="col-md-9 item-ul-list .col-xs-12 .col-sm-6">
+                  <a href="{{ post.url }}"><i class="fa far fa-hand-o-right" style="margin-right: .3em;"></i>{{- post.title -}}</a>
+                </div>
+                <div class="col-md-3 item-ul-date .col-xs-6 .col-sm-4">{{ post.date | date:"%Y-%m-%d"}}
+                </div>
+              </div>
+              {% endif %}
+              {% endif %}
+              {% endfor %}
+            </div>
+            {% endif %}
+            <!-- 找到符合条件的盒子结束 -->
+    
+            <!-- 放个小对齐 tag 里 post 外-->
+            {% assign is_clear_fix = ok_box | modulo: 2 %} 
+            {% if is_clear_fix == 0 %}
+            <div class="clearfix"></div>
+            {% endif %}
+    
+            {% endfor %}
+            <!-- 所有盒子结束 -->
+    
+            {% endfor %} 
+            <!-- 寻找最大的盒子结束 -->
+         
+    
+    
+          </div>
+        </div>
+        <div class="col-md-3 extra-box">
+          <div class="row">
+            <div class="col-md-10 offset-md-1">
+              {% include info.html %}
+            </div>
+            <div class="col-md-10 offset-md-1 recent-article-box">
+            <div class="row row-cols-2 recent-article-box-title-line">
+              <div class="col-md-9 recent-article-box-title">
+                <i class="fa fa-book" style="margin-right: .3em;"></i><span class="font-bold">最新文章</span>
+              </div>
+              <div class="col-md-3 recent-article-box-title-info .col-xs-6 .col-sm-4">
+                <a href="#">+</a>
+              </div>
+            </div>
+            {% for post in groups limit:recent_article_num %}
+            <div class="row row-cols-2  item-ul-line">
+              <div class="col-md-9 item-ul-list .col-xs-12 .col-sm-6">
+                <a href="{{ post.url }}"><i class="fa far fa-hand-o-right" style="margin-right: .3em;"></i>{{
+                  post.title}}</a>
+              </div>
+              <div class="col-md-3 item-ul-date .col-xs-6 .col-sm-4">{{ post.date | date:"%Y-%m-%d"}}</div>
+            </div>
+    
+            {% endfor %}
+          </div>
+          <div class="col-md-10 offset-md-1 archived-box">
+            <div class="row row-cols-4 ">
+              {% assign tag_cloud_count = 0 %}
+              {% assign max_tag_count_d = max_tag_count | times: 1.0%}
+              {% for tag in tags %}
+              {% assign tag_cloud_count = tag_cloud_count | plus: 1 %}
+              {% assign tag_value = tag_values[tag_cloud_count] | abs %}
+    
+              {% if tag_value >= tag_cloud_count_default %}
+              <div class="col-md-3 cloud-tags">
+                {% assign tag_per = tag_value | divided_by: max_tag_count_d %}
+                {% assign tag_per_reverse = 1 | minus: tag_per %}
+                {% assign tag_per_color = max_tag_count_d | minus: tag_value | divided_by: max_tag_count_d | times: 255 %}
+                  <div class="post-tags-item" href="" style="background-color:rgb(0,0,0,{{ tag_per }})">
+                      <span class="tag_cloud_num" style="background-color:rgb(255,142,0,{{ tag_per }})" >{{- tag_value -}}</span>
+                      <span class="tag_cloud_tag" >{{- tag -}}</span>
+                  </div>
+              </div>
+              {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% include footer.html %} 
+
+</body>
+
+</html>

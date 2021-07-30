@@ -1,0 +1,63 @@
+<!-- Foot -->
+
+
+{% if site.comment %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <!-- 来必力City版安装代码 -->
+            <div id="lv-container" data-id="city" data-uid="MTAyMC81MzY0My8zMDExNg==">
+                <script type="text/javascript">
+                     $('body').ready(function(){
+                        (function (d, s) {
+                        var j, e = d.getElementsByTagName(s)[0];
+
+                        if (typeof LivereTower === 'function') { return; }
+
+                        j = d.createElement(s);
+                        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                        j.async = true;
+
+                        e.parentNode.insertBefore(j, e);
+                    })(document, 'script');
+                    })
+                </script>
+                <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+            </div>
+            <!-- City版安装代码已完成 -->
+
+        </div>
+    </div>
+</div>
+
+{% endif %}
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="copyright col-md-10 offset-md-1">
+        {% if site.github_username %}
+          <a href="https://github.com/{{ site.github_username }}/{{ site.project_repository}}">
+            <span class="fa-stack fa-lg">
+              <i class="fa fa-circle fa-stack-2x"></i>
+              <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+            </span>
+          </a>
+        {% endif %}
+        {% if site.rss %}
+          <a href="{{ site.url }}/assets/feed.xml">
+            <span class="fa-stack fa-lg">
+              <i class="fa fa-circle fa-stack-2x"></i>
+              <i class="fa fa-feed fa-stack-1x fa-inverse"></i>
+            </span>
+          </a>
+        {% endif %}
+      </div>
+    </div>
+    <p class="copyright text-muted"> Copyright © <a href="{{ post.url }}" target="">半路出家</a></p>
+  </div>
+</footer>
+
+

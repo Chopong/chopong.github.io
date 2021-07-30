@@ -3,56 +3,81 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
   <meta name="description" content="{{ site.description }}">
-  <link rel='shortcut icon' type='image/png' href='{{ site.baseurl }}/sundry/logo/favicon.ico' />
+  <link rel='shortcut icon' type='image/png' href='{{ site.baseurl }}/assets/logo/favicon.ico' />
   <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="{{ site.url }}/{{ site.baseurl }}/{{ page.url }}" />
   <meta property="og:image" content="{{ site.url }}/{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}">
   <meta property="og:image" content="{{ site.url }}{{ site.sidebar-avatar }}">
   <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+
+
+
+
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
 
+
+
+ <script src="{{ '/assets/js/popper.js' | prepend: site.baseurl  | prepend: site.url }}"> </script>
+
+
+
+
+  
  <!-- jQuery -->
- <script src="{{"/sundry/js/jquery.js" | prepend: site.baseurl | prepend: site.url }}"></script>
- <script src="{{ "/sundry/js/typed.js" | prepend: site.baseurl | prepend: site.url }}"></script>
+ <script src="{{"/assets/js/jquery.js" | prepend: site.baseurl | prepend: site.url }}"></script>
+ <script src="{{"/assets/js/typed.js" | prepend: site.baseurl | prepend: site.url }}"></script>
 
   <!-- Bootstrap Core CSS -->
-  <link rel="stylesheet" type="text/css" href="{{ "/sundry/css/bootstrap.css" | prepend: site.baseurl | prepend: site.url }}" />
-  <script src="{{ "/sundry/js/bootstrap.js" | prepend: site.baseurl | prepend: site.url }}"></script>
+  <link rel="stylesheet" type="text/css" href="{{ "/assets/bootstrap-4.6.0/css/bootstrap.css" | prepend: site.baseurl | prepend: site.url }}" />
+  <script src="{{ "/assets/bootstrap-4.6.0/js/bootstrap.bundle.js" | prepend: site.baseurl | prepend: site.url }}"></script>
+  <script src="{{ "/assets/bootstrap-4.6.0/js/bootstrap.js" | prepend: site.baseurl | prepend: site.url }}"></script>
 <!-- Bootstrap End-->
 
   <!-- Adjust Colors -->
-  <link rel="stylesheet" href="{{ "/sundry/colorscheme.scss" | prepend: site.baseurl | prepend: site.url }}">
+  <link rel="stylesheet" href="{{ "/assets/colorscheme.scss" | prepend: site.baseurl | prepend: site.url }}">
+  
 
   <!-- Custom Fonts -->
-  <link href="{{ "/sundry/font/font-awesome/css/font-awesome.min.css" | prepend: site.baseurl | prepend: site.url }}" rel="stylesheet" type="text/css">
-  <link href="{{ "/sundry/css/googlelora.css" | prepend: site.baseurl | prepend: site.url }}" rel='stylesheet' type='text/css'>
-  <link href="{{ "/sundry/css/googleopensans.css" | prepend: site.baseurl | prepend: site.url }}" rel='stylesheet' type='text/css'>
+  <link href="{{ "/assets/font/font-awesome/css/font-awesome.min.css" | prepend: site.baseurl | prepend: site.url }}" rel="stylesheet" type="text/css">
+  <link href="{{ "/assets/css/googlelora.css" | prepend: site.baseurl | prepend: site.url }}" rel='stylesheet' type='text/css'>
+  <link href="{{ "/assets/css/googleopensans.css" | prepend: site.baseurl | prepend: site.url }}" rel='stylesheet' type='text/css'>
 
   <!-- Math Jax -->
-  <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
+  <script type="text/javascript" src="{{ "/assets/js/MathTeX-mml.js" | prepend: site.baseurl | prepend: site.url }}"></script>
+<!--  <script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});</script>
   <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   <script type="text/x-mathjax-config"> MathJax.Hub.Config({TeX: { equationNumbers: { autoNumber: "AMS" } }});</script>
-
+-->
  
   <!-- JavaScript -->
-  
+ 
   
   <!-- Custom Theme JavaScript -->
-  <script src="{{ "/sundry/js/clean-blog.js " | prepend: site.baseurl | prepend: site.url }}"></script>
+  <script src="{{ "/assets/js/clean-blog.js " | prepend: site.baseurl | prepend: site.url }}"></script>
 
    <!-- Custom CSS -->
-  <link rel="stylesheet" href="{{ "/sundry/css/clean-blog.css" | prepend: site.baseurl | prepend: site.url }}">
+  <link rel="stylesheet" href="{{ "/assets/css/clean-blog.css" | prepend: site.baseurl | prepend: site.url }}">
 
 
   <!-- Custom chopong js  -->
-  <script src="{{ "/sundry/js/chopong.js" | prepend: site.baseurl | prepend: site.url }}"></script>
-  <link rel="stylesheet" href="{{ "/sundry/css/chopong.css" | prepend: site.baseurl | prepend: site.url }}">
+  <script src="{{ "/assets/js/chopong.js" | prepend: site.baseurl | prepend: site.url }}"></script>
+  <script src="{{ '/plugins/prism-light/prism_coy.js' | prepend: site.baseurl | prepend: site.url }}"></script>
+  <link rel="stylesheet" href="{{ "/plugins/prism-light/prism_coy.css" | prepend: site.baseurl | prepend: site.url }}">
+  <script type="text/javascript">
+    $('div.code-toolbar').addClass("line-numbers");
+    // $('pre').addClass("line-numbers").css("white-space", "pre-wrap");
+  </script>
+
+
+  <link rel="stylesheet" href="{{ "/assets/css/chopong.css" | prepend: site.baseurl | prepend: site.url }}">
 
    <!-- Custom search plugin  -->
-  <link rel="stylesheet" href="{{ "/plugins/search/cb-search.css" | prepend: site.baseurl }}">
-  <script src="{{ "/plugins/search/bootstrap3-typeahead.min.js" | prepend: site.baseurl }}"></script>
+  <script src="{{ "/plugins/search/bootstrap-typeahead.js" | prepend: site.baseurl }}"></script>
   <script src="{{ "/plugins/search/cb-search.js" | prepend: site.baseurl }}"></script>
+
+
+  
   {% seo %}
   {% include analytics.html %}
 </head>

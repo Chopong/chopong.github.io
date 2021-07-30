@@ -13,49 +13,58 @@ layout: none
 
   <div id="video_box">
     <video autoplay="" loop="">
-      <source src="./sundry/video/mountains.mp4" type="video/mp4">
-      <source src="./sundry/video/mountains.webm" type="video/webm">
-      <source src="./sundry/video/mountains.ogv" type="video/ogg">
+      <source src="./assets/video/mountains.mp4" type="video/mp4">
+      <source src="./assets/video/mountains.webm" type="video/webm">
+      <source src="./assets/video/mountains.ogv" type="video/ogg">
     </video>
   </div>
 
   <!-- Main Wrapper -->
-  
-  <div class="container-my-auto cp_vCenter text-center">
-      <div id="cp_typed-strings">
-        <p>数学爱好者</p>
-        <p>统计学渣</p>
-        <p>技术宅</p>
-        <p>数码爱好者</p>
-      </div>
-      <br><br><br>
-      <a href="index.html">
-        <img src="sundry/logo/v1alt.png" style="margin-top: 5%;" alt="Logo Light" />
-      </a>
-      <br><br><br>
-      <h2><span style="color:#f2f2f2;background-color: rgb(0, 0, 0, 0.7);padding: .2em .1em .2em .4em;border-radius: .2em;">
+
+  <div class="cp_front_page" style="text-align:center">
+    <div id="cp_typed-strings">
+      <p>数学爱好者</p>
+      <p>统计学渣</p>
+      <p>技术宅</p>
+      <p>数码爱好者</p>
+    </div>
+    <br><br><br>
+    <a href="index.html">
+      <img src="assets/logo/v1alt.png" style="margin-top: 5%;" alt="Logo Light" />
+    </a>
+    <br><br><br>
+    <h2><span style="color:#f2f2f2;background-color: rgb(0, 0, 0, 0.7);padding: .2em .1em .2em .4em;border-radius: .2em;">
         I'm <span id="cp_typed"></span>
-        </span>
-      </h2>
-      <p class="title_words">
-        <font style="color: rgb(255,142,0);font-weight: bold;"> we beat on, boats against the current, borne back ceaselessly into the past.
-        </font>
-        <br><br>
-        
-        <small>我是一个数码爱好者，同时也是一个数学爱好者，然而统计学却学的很烂，如果你有什么建议或者有什么想法，欢迎联系我
+      </span>
+    </h2>
+    <p class="title_words">
+      <font style="color: rgb(255,142,0);font-weight: bold;"> we beat on, boats against the current, borne back ceaselessly into the past.
+      </font>
+      <br><br>
+      <small>我是一个数码爱好者，同时也是一个数学爱好者，然而统计学却学的很烂，如果你有什么建议或者有什么想法，欢迎联系我
         <br> I'm font of digital device and technology as well as mathematics, however, my statistics sucks.
         Email me if you want to.</small>
-      </p>
-      <div class="frontbtn">
-      <a href="https://chopong.github.io/" class="frontblogbtn">My Blog</a>
-      <a href="./category/contact.html" class="frontconbtn">Contact</a>
+    </p>
+    <div class="cp_btn">
+      <a href="https://chopong.github.io/" class="cp_btn_type1">My Blog</a>
+      <a href="./category/contact.html" class="cp_btn_type2">Contact</a>
     </div>
   </div>
-
   <!-- Main Wrapper End -->
-  <script src="{{ "/sundry/js/chopong.js" | prepend: site.baseurl | prepend: site.url }}"></script>
-
+  <script src="{{ "/assets/js/chopong.js" | prepend: site.baseurl | prepend: site.url }}"></script>
   {% include analytics.html %}
+
+  <script>
+  // Typed Text Animation
+    var typed = new Typed('#cp_typed', {
+      stringsElement: '#cp_typed-strings',
+      loop: true,
+      typeSpeed: 100,
+      backSpeed: 50,
+      backDelay: 1500,
+    });
+  </script>
 </body>
+
 
 </html>
