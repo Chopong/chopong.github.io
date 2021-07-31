@@ -11,7 +11,7 @@ tags: post note linux sublime editor
 ---
 
 # Table of Contents #
-* TOC
+
 {:toc}
 
 

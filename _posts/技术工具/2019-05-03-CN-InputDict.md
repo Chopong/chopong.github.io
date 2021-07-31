@@ -18,7 +18,7 @@ tags: post note Chinese input dictionary fcitx sunpinyin pinyin sg2fcitx createP
 {% include slide-b.html %}
 
 # Table of Contents #
-* TOC
+
 {:toc}
 [Chinese Version](https://github.com/Chopong/fcitx-dict)
 

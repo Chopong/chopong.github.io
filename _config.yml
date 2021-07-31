@@ -29,7 +29,7 @@ linkedin_username: # Chopong
 rss: true
 
 # Build settings
-plugins: [jekyll-paginate, jekyll-sitemap, jekyll-seo-tag]
+plugins: [jekyll-sitemap, jekyll-seo-tag]
 markdown: kramdown
 kramdown:
   input: GFM
@@ -41,14 +41,11 @@ kramdown:
       start_line: #1
 
 highlighter: rouge
-permalink: /:title.html
 
 permalink: /:categories/:year/:month/:title.html
 defaults:
   - values:
       layout: "default"
 
-paginate: 15
-paginate_path: /page:num/
 exclude: ["node_modules","package.json","README.md"]
 # ------------ CONFIGURABLE END ------------

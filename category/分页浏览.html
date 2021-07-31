@@ -1,0 +1,157 @@
+---
+layout: default
+article_category_title: "分页浏览"
+assign head_img: "../img/background/math-1.png"
+tag_cloud_count_default: 3
+---
+
+{% assign head_img = page.head_img | default: "../img/background/home-bg2.jpg"%}
+{% assign tag_cloud_count_default = page.tag_cloud_count_default | default: 3 %}
+
+{% assign groups = site.posts %}
+{% for post in groups %}
+     {% assign tags = tags | concat: post.tags | uniq %}
+     {% assign years = post.date | date:"%Y-%m" | split: ','%}
+     {% assign sdate = sdate | concat: years | uniq %}
+{% endfor %}
+
+{% assign tag_string = "" %}
+{% assign max_tag_count = 0 %}
+{% for tag in tags %}
+  {% assign tag_count = 0%}
+  {% for post in groups %}
+    {% if post.tags contains tag %}
+      {% assign tag_count = tag_count | plus: 1%}
+    {% endif %}
+  {% endfor %}
+  {% assign tag_string = tag_string | append: "," | append: tag_count %}
+  {% assign max_tag_count = tag_count | at_least: max_tag_count | times: 1.0 %}
+{% endfor %}
+<!-- 产生一个以 空白 开头的数组 -->
+{% assign tag_values = tag_string | split: ',' %}
+
+<header class="intro-header" style="background-image: url({{ head_img }});">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 offset-md-1">
+          <div class="post-heading" style="padding: 80px 0">
+            <h1>{{article_category_title}}</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+</header>
+
+
+
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6 offset-md-2 content-box">
+          
+        {% assign page_nums_on_page = 10 %}
+        {% assign post_nums_counter = page_nums_on_page %}
+        {% assign cc = 1 %}
+        
+        {% assign pa = page_nums_on_page | times: 1.0 %}
+        {% assign ccd = site.posts | size | divided_by: pa | ceil %}
+        <nav aria-label="Page navigation example" class="d-flex justify-content-center">
+            <ul class="pagination">
+              <li class="page-item"><a class="page-link" id="button-pre" >Previous</a></li>
+              {% for page_num in (1..ccd) %}
+              <li class="page-item"><a class="page-link" id="button-{{page_num}}">{{page_num}}</a></li>
+              {% endfor %}
+              <li class="page-item"><a class="page-link" id="button-next">Next</a></li>
+            </ul>
+        </nav>
+
+        <div class="container" id="paginate_page">  
+          {% for post in site.posts%}
+          {% if post_nums_counter == page_nums_on_page %}
+            <div class="list-group flex-column collapse" id="page-{{ cc }}">
+          {% endif %}
+          {% if post_nums_counter >= 1 %}
+            <a href="{{ post.url }}" class="list-group-item list-group-item-action flex-column align-items-start" >
+              <div class="d-flex w-100" style="height: 45px;overflow: hidden;"><h5>{{ post.title }}</h5></div>
+              <div class="d-flex w-100" style="height: 40px;overflow: hidden;"><h6>{{ post.subtitle }}</h6></div>
+              <div class="d-flex w-100" style="height: 2em;">
+                <span style="overflow: hidden;width: 70%;white-space: nowrap;"><small>
+                    {% for tag in post.tags %}    
+                    <span class="badge badge-secondary">{{ tag }}</span>
+                    {% endfor %}
+                </small></span>
+                <span style="overflow: nowrap;width: 30%;text-align: right;"><small>{{ post.date | date:" %Y-%m-%d"}}</small></span>
+              </div>
+            </a>
+          {% endif%}
+          {% assign post_nums_counter = post_nums_counter | minus: 1 %}
+          {% if post_nums_counter == 0 %}
+             </div>
+             {% assign cc = cc | plus: 1 %}
+             {% assign post_nums_counter = page_nums_on_page %}
+          {% endif %}
+          {% endfor%}
+        </div>
+        </div>
+         
+
+    </div>
+      <div class="col-md-3 extra-box">
+        <div class="row">
+          <div class="col-md-10 offset-md-1">
+            {% include info.html %}
+          </div>
+          <div class="col-md-10 offset-md-1 recent-article-box">
+          <div class="row row-cols-2 recent-article-box-title-line">
+            <div class="col-md-9 recent-article-box-title">
+              <i class="fa fa-book" style="margin-right: .3em;"></i><span class="font-bold">文章统计</span>
+            </div>
+            <div class="col-md-3 recent-article-box-title-info .col-xs-6 .col-sm-4">
+              <a href="#">+</a>
+            </div>
+          </div>
+          {% for postdate in sdate %}
+          {% assign postdatecount = 0 %}
+          {% for post in groups %}
+          {% assign post_date = post.date | date: "%Y-%m"%}
+          {% if post_date == postdate %}
+          {% assign postdatecount = postdatecount | plus: 1 %}
+          {% endif %}
+          {% endfor %}
+          <div class="row row-cols-2 item-ul-line">
+            <div class="col-md-9 item-ul-list">
+              <a href="#"><i class="fa far fa-hand-o-right" style="margin-right: .3em;"></i>{{
+                postdate }}</a>
+            </div>
+            <div class="col-md-3 item-ul-date .col-xs-6 .col-sm-4">{{ postdatecount }}</div>
+          </div>
+
+          {% endfor %}
+        </div>
+        <div class="col-md-10 offset-md-1 archived-box">
+          <div class="row row-cols-4 ">
+            {% assign tag_cloud_count = 0 %}
+            {% assign max_tag_count_d = max_tag_count | times: 1.0%}
+            {% for tag in tags %}
+            {% assign tag_cloud_count = tag_cloud_count | plus: 1 %}
+            {% assign tag_value = tag_values[tag_cloud_count] | abs %}
+  
+            {% if tag_value >= tag_cloud_count_default %}
+            <div class="col-md-3 cloud-tags">
+              {% assign tag_per = tag_value | divided_by: max_tag_count_d %}
+              {% assign tag_per_reverse = 1 | minus: tag_per %}
+              {% assign tag_per_color = max_tag_count_d | minus: tag_value | divided_by: max_tag_count_d | times: 255 %}
+                <div class="post-tags-item" href="" style="background-color:rgb(0,0,0,{{ tag_per }})">
+                    <span class="tag_cloud_num" style="background-color:rgb(255,142,0,{{ tag_per }})" >{{- tag_value -}}</span>
+                    <span class="tag_cloud_tag" >{{- tag -}}</span>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<script scr="../assets/js/chopong.js"></script>
+<script>chopong_pagination(); </script>

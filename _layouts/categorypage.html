@@ -13,7 +13,7 @@
 {% assign head_img = page.head_img | default: "../img/background/home-bg2.jpg"%}
 {% assign article_num_per_block = page.article_num_per_block | default: 10 %}
 {% assign article_num_per_block_least = page.article_num_per_block_least | default: 2 %}
-{% assign recent_article_num = page.recent_article_num | default: 10 %}
+{% assign recent_articles_num = page.recent_articles_num | default: 10 %}
 {% assign tag_cloud_count_default = page.tag_cloud_count_default | default: 2 %}
 <!-- 页面配置结束 -->
 
@@ -126,7 +126,7 @@
                 <a href="#">+</a>
               </div>
             </div>
-            {% for post in groups limit:recent_article_num %}
+            {% for post in groups limit:recent_articles_num %}
             <div class="row row-cols-2  item-ul-line">
               <div class="col-md-9 item-ul-list .col-xs-12 .col-sm-6">
                 <a href="{{ post.url }}"><i class="fa far fa-hand-o-right" style="margin-right: .3em;"></i>{{
