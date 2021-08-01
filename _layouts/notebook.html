@@ -38,13 +38,13 @@ layout: default
     <h3>{{ member.name }}</h3>
     <h4>{{ member.role }}</h4>
     {% if member.github %}
-    <a href="https://github.com/{{ member.github }}" title="Github"><img src="{{ "/img/icons/github-icon.png " | prepend: site.baseurl }}" style="height:50px; float:right; margin-bot:10px"></a>
+    <a href="https://github.com/{{ member.github }}" title="Github"><img src="{{ "/assets/logo/github-icon.png " | prepend: site.baseurl }}" style="height:50px; float:right; margin-bot:10px"></a>
     {% endif %}
     {% if member.gplus %}
-    <a href="{{ member.gplus }}" title="Google Plus"><img src="{{ "/img/icons/gplus-icon.png " | prepend: site.baseurl }}" style="height:37px; float:right; margin-top:6px"></a>
+    <a href="{{ member.gplus }}" title="Google Plus"><img src="{{ "/assets/logo/gplus-icon.png " | prepend: site.baseurl }}" style="height:37px; float:right; margin-top:6px"></a>
     {% endif %}
     {% if member.url %}
-    <a href="{{ member.url }}" title="Google Plus"><img src="{{ "/img/icons/url-icon.png "| prepend: site.baseurl }}" style="height:33px; float:right; margin-top:9px;  margin-right: 10px"></a>
+    <a href="{{ member.url }}" title="Google Plus"><img src="{{ "/assets/logo/url-icon.png "| prepend: site.baseurl }}" style="height:33px; float:right; margin-top:9px;  margin-right: 10px"></a>
     {% endif %}
     {% endif %}
     {% endfor %}

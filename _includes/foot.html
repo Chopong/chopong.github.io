@@ -1,61 +1,60 @@
-<!-- Foot -->
+<!-- Head for css file Foot for script file this must before </body>-->
 
 
-{% if site.comment %}
+ <!-- jQuery -->
+ <script src="{{"/assets/js/jquery.js" | prepend: site.baseurl | prepend: site.url }}"></script>
+ <script src="{{"/assets/js/typed.js"  | prepend: site.baseurl | prepend: site.url }}"></script>
+ <script src="{{"/assets/js/popper.js" | prepend: site.baseurl | prepend: site.url }}"> </script>
+ 
+<!-- Bootstrap Core CSS -->
+ <script src="{{ "/assets/bootstrap-4.6.0/js/bootstrap.bundle.js" | prepend: site.baseurl | prepend: site.url }}"></script>
+ <script src="{{ "/assets/bootstrap-4.6.0/js/bootstrap.js" | prepend: site.baseurl | prepend: site.url }}"></script>
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <!-- 来必力City版安装代码 -->
-            <div id="lv-container" data-id="city" data-uid="MTAyMC81MzY0My8zMDExNg==">
-                <script type="text/javascript">
-                     $('body').ready(function(){
-                        (function (d, s) {
-                        var j, e = d.getElementsByTagName(s)[0];
+  <!-- Math Jax -->
+  <!-- MathJax On line way -->
+  <!--
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  -->
 
-                        if (typeof LivereTower === 'function') { return; }
+  <!-- MathJax Off line way -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      TeX: { equationNumbers: { autoNumber: "AMS" } },
+      displayAlign: "left",
+      displayIndent: "2em",
+      showProcessingMessages: false,//去除左下角加载框
+      messageStyle: "none",
+      extensions: ["tex2jax.js"],
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        inlineMath:  [ ["$latex ", "$"] , ["$", "$"]],//可以自定义行内公式的标识
+        displayMath: [ ["$$","$$"] ],//行间公式同理
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code','a'],//不渲染这些标签内的东西
+        ignoreClass:"comment-content"
+      },
+      "HTML-CSS": {
+        availableFonts: ["STIX","TeX"],
+        showMathMenu: false//不显示右键菜单
+      }
+    });
+    MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+  </script>
+  <script src="{{ '/plugins/MathJax/es5/tex-mml-chtml.js?config=TeX-AMS-MML_HTMLorMML' | prepend: site.baseurl | prepend: site.url }}"></script>
 
-                        j = d.createElement(s);
-                        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-                        j.async = true;
+<!-- highlight Code with highlightjs -->
+<script src="{{ '/plugins/highlight/highlight.min.js' | prepend: site.baseurl | prepend: site.url }}"></script>
+<script src="{{ '/plugins/highlight/highlightjs-line-numbers.min.js' | prepend: site.baseurl | prepend: site.url }}"></script>
+<script>
+  hljs.highlightAll();
+  hljs.initLineNumbersOnLoad();
+  hljs.configure({ ignoreUnescapedHTML: true })
+</script>
 
-                        e.parentNode.insertBefore(j, e);
-                    })(document, 'script');
-                    })
-                </script>
-                <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
-            </div>
-            <!-- City版安装代码已完成 -->
+<!-- Custom search plugin  -->
+ <script src="{{ '/plugins/search/bootstrap-typeahead.js' | prepend: site.baseurl | prepend: site.url }}"></script>
+ <script src="{{ '/plugins/search/search.js' | prepend: site.baseurl | prepend: site.url }}"></script>
 
-        </div>
-    </div>
-</div>
-
-{% endif %}
-
-
-<footer class="footer">
-  <div class="container">
-    <div class="row">
-      <div class="copyright col-md-10 offset-md-1">
-        {% if site.github_username %}
-          <a href="https://github.com/{{ site.github_username }}/{{ site.project_repository}}">
-            <span class="fa-stack fa-lg">
-              <i class="fa fa-circle fa-stack-2x"></i>
-              <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-            </span>
-          </a>
-        {% endif %}
-        {% if site.rss %}
-          <a href="{{ site.url }}/assets/feed.xml">
-            <span class="fa-stack fa-lg">
-              <i class="fa fa-circle fa-stack-2x"></i>
-              <i class="fa fa-feed fa-stack-1x fa-inverse"></i>
-            </span>
-          </a>
-        {% endif %}
-      </div>
-    </div>
-    <p class="copyright text-muted"> Copyright © <a href="{{ post.url }}" target="">半路出家</a></p>
-  </div>
-</footer>
+ <!-- Custom chopong js  -->
+ <script src="{{ '/assets/js/clean-blog.js' | prepend: site.baseurl | prepend: site.url }}"></script>
+ <script src="{{ '/assets/js/chopong.js' | prepend: site.baseurl | prepend: site.url }}"></script>

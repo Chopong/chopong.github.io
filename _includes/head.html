@@ -1,3 +1,6 @@
+<!-- Head for css file Foot for script file -->
+
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,91 +14,27 @@
   <meta property="og:image" content="{{ site.url }}{{ site.sidebar-avatar }}">
   <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
 
-
-
-
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
 
-
-
- <!-- jQuery -->
- <script src="{{"/assets/js/jquery.js" | prepend: site.baseurl | prepend: site.url }}"></script>
- <script src="{{"/assets/js/typed.js"  | prepend: site.baseurl | prepend: site.url }}"></script>
- <script src="{{"/assets/js/popper.js" | prepend: site.baseurl | prepend: site.url }}"> </script>
-
   <!-- Bootstrap Core CSS -->
-  <link rel="stylesheet" type="text/css" href="{{ "/assets/bootstrap-4.6.0/css/bootstrap.css" | prepend: site.baseurl | prepend: site.url }}" />
-  <script src="{{ "/assets/bootstrap-4.6.0/js/bootstrap.bundle.js" | prepend: site.baseurl | prepend: site.url }}"></script>
-  <script src="{{ "/assets/bootstrap-4.6.0/js/bootstrap.js" | prepend: site.baseurl | prepend: site.url }}"></script>
-<!-- Bootstrap End-->
+  <link href="{{ "/assets/bootstrap-4.6.0/css/bootstrap.css"          | prepend: site.baseurl | prepend: site.url }}" rel="stylesheet" type="text/css"/>
 
   <!-- Adjust Colors -->
-  <link rel="stylesheet" href="{{ "/assets/colorscheme.scss" | prepend: site.baseurl | prepend: site.url }}">
-
+  <link rel="stylesheet" href="{{ "/assets/colorscheme.scss"          | prepend: site.baseurl | prepend: site.url }}">
 
   <!-- Custom Fonts -->
-  <link href="{{ "/assets/font/font-awesome/css/font-awesome.min.css" | prepend: site.baseurl | prepend: site.url }}" rel="stylesheet" type="text/css">
-  <link href="{{ "/assets/css/googlelora.css" | prepend: site.baseurl | prepend: site.url }}" rel='stylesheet' type='text/css'>
-  <link href="{{ "/assets/css/googleopensans.css" | prepend: site.baseurl | prepend: site.url }}" rel='stylesheet' type='text/css'>
-
-  <!-- Math Jax -->
-  <!-- MathJax On line way -->
-  <!--
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  -->
-
-  <!-- MathJax Off line way -->
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      TeX: { equationNumbers: { autoNumber: "AMS" } },
-      displayAlign: "left",
-      displayIndent: "2em",
-      showProcessingMessages: false,//去除左下角加载框
-      messageStyle: "none",
-      extensions: ["tex2jax.js"],
-      jax: ["input/TeX", "output/HTML-CSS"],
-      tex2jax: {
-        inlineMath:  [ ["$latex ", "$"] , ["$", "$"]],//可以自定义行内公式的标识
-        displayMath: [ ["$$","$$"] ],//行间公式同理
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code','a'],//不渲染这些标签内的东西
-        ignoreClass:"comment-content"
-      },
-      "HTML-CSS": {
-        availableFonts: ["STIX","TeX"],
-        showMathMenu: false//不显示右键菜单
-      }
-    });
-    MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
-  </script>
-  <script src="{{ '/plugins/MathJax/es5/tex-mml-chtml.js?config=TeX-AMS-MML_HTMLorMML' | prepend: site.baseurl | prepend: site.url }}"></script>
-
+  <link href="{{ "/assets/font/font-awesome/css/font-awesome.min.css" | prepend: site.baseurl | prepend: site.url }}" rel="stylesheet" type="text/css"/>
+  <link href="{{ "/assets/css/googlelora.css"                         | prepend: site.baseurl | prepend: site.url }}" rel='stylesheet' type='text/css'/>
+  <link href="{{ "/assets/css/googleopensans.css"                     | prepend: site.baseurl | prepend: site.url }}" rel='stylesheet' type='text/css'/>
 
   <!-- highlight Code with highlightjs -->
-  <link rel="stylesheet" href="{{ '/plugins/highlight/styles/xcode.min.css' | prepend: site.baseurl | prepend: site.url }}">
-  <script src="{{ '/plugins/highlight/highlight.min.js' | prepend: site.baseurl | prepend: site.url }}"></script>
-  <script src="{{ '/plugins/highlight/highlightjs-line-numbers.min.js' | prepend: site.baseurl | prepend: site.url }}"></script>
+  <link href="{{ "/plugins/highlight/styles/xcode.min.css"            | prepend: site.baseurl | prepend: site.url }}" rel="stylesheet" type="text/css"/>
 
-  <script>
-    hljs.highlightAll();
-    hljs.initLineNumbersOnLoad();
-    hljs.configure({ ignoreUnescapedHTML: true })
-  </script>
+  <!-- Custom Theme css -->
+  <link href="{{ "/assets/css/clean-blog.css"                         | prepend: site.baseurl | prepend: site.url }}" rel="stylesheet" type="text/css"/>
 
-  <!-- JavaScript -->
-
-  <!-- Custom search plugin  -->
-  <script src="{{ "/plugins/search/bootstrap-typeahead.js" | prepend: site.baseurl | prepend: site.url }}"></script>
-  <script src="{{ "/plugins/search/search.js" | prepend: site.baseurl | prepend: site.url }}"></script>
-
-  <!-- Custom Theme JavaScript -->
-  <script src="{{ "/assets/js/clean-blog.js " | prepend: site.baseurl | prepend: site.url }}"></script>
-  <link rel="stylesheet" href="{{ "/assets/css/clean-blog.css" | prepend: site.baseurl | prepend: site.url }}">
-
-
-  <!-- Custom chopong js  -->
-  <script src="{{ "/assets/js/chopong.js" | prepend: site.baseurl | prepend: site.url }}"></script>
-  <link rel="stylesheet" href="{{ "/assets/css/chopong.css" | prepend: site.baseurl | prepend: site.url }}">
+  <!-- Custom chopong css  -->
+  <link href="{{ "/assets/css/chopong.css"                            | prepend: site.baseurl | prepend: site.url }}" rel="stylesheet" type="text/css"/>
 
   {% seo %}
   {% include analytics.html %}

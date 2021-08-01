@@ -1,6 +1,12 @@
----
-layout: default
----
+<!DOCTYPE html>
+<html>
+
+{% include head.html %}
+
+<body data-spy="scroll" data-target="#navbar-toc" data-offset="0" style="position: relative;">
+  <!-- onselectstart="return false"-->
+  {% include nav.html %}
+
 <!-- Post Header -->
 <header class="intro-header" id="intro_bac" style="background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}');">
   <div class="container">
@@ -18,8 +24,6 @@ layout: default
   </div>
 </header>
 
-<div id="cp-progress"></div>
-
 <!-- Post Content -->
 {% include imagezoom.html %}
 
@@ -28,8 +32,6 @@ layout: default
     <div class="row">
       <div id="Chopong_TOC" class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
           {{ content | markdownify }}
-          <hr>
-
         <ul class="pager">
           {% if page.previous.url %}
           <li class="previous">
@@ -48,24 +50,36 @@ layout: default
   </div>
 </article>
 
-
 <aside id="Chopong_TOC_Position"></aside>
-
 
 <div class="toc_button"  onclick="toc_toggle('navbar-toc')">
   <i class="fa fa-bars fa-2x"></i>
 </div>
+<div>
+  <a id="back_to_top" data-placement="top" title="返回顶部" href="#top">
+    <i class="fa fa-arrow-up fa-2x"></i>
+  </a>
+</div>
 
-<script src="{{ '/assets/js/chopong.js' | prepend: site.baseurl }}"> </script>
+
+
+{% include foot.html %}
 
 <script type="text/javascript">
   chopong_Toc('Chopong_TOC', {
     'level': 6,
     'targetId': 'Chopong_TOC_Position'
   });
-
 </script>
 
-<hr>
+
 {% include comments.html %}
-<hr>
+
+{% include footer.html %}
+
+</body>
+
+</html>
+
+
+

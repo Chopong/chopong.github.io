@@ -4,7 +4,7 @@ name: 维尔斯特拉斯
 email: weisp.pku@gmail.com
 header-img: img/home-bg.jpg
 description: "So we beat on, boats against the current, borne back ceaselessly into the past."
-logo: img/logos/v4.png
+logo: /assets/logo/v4.png
 avatar: img/article/demo.png
 comment: livere
 #url: "http://127.0.0.1:4000/"
@@ -42,7 +42,7 @@ kramdown:
 
 highlighter: rouge
 
-permalink: /:categories/:year/:month/:title.html
+permalink: /:categories/:year/:month-:title.html
 defaults:
   - values:
       layout: "default"

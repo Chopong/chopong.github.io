@@ -613,3 +613,11 @@ pre>code.hljs{
 }
 
 /* for block of code */
+
+img.desaturate {
+	　　filter: grayscale(100%);
+	　　-webkit-filter: grayscale(100%);
+	　　-moz-filter: grayscale(100%);
+	　　-ms-filter: grayscale(100%);
+	　　-o-filter: grayscale(100%);
+	}

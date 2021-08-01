@@ -3,27 +3,18 @@
 
 {% include head.html %}
 
-<body data-spy="scroll" data-target="#navbar-toc" data-offset="0" style="position: relative;"> <!-- onselectstart="return false"-->
+<body data-spy="scroll" data-target="#navbar-toc" data-offset="0" style="position: relative;">
+  <!-- onselectstart="return false"-->
+  {% include nav.html %}
+  <div>
+    <a id="back_to_top" data-placement="top" title="返回顶部" href="#top">
+      <i class="fa fa-arrow-up fa-2x"></i>
+    </a>
+  </div>
 
-{% include nav.html %}
+  {{ content }}
 
-
-
-<div>
-   <a id="back_to_top"  data-placement="top" title="返回顶部" href="#top">
-     <i class="fa fa-arrow-up fa-2x"></i>
-   </a>
- </div>
- 
-   {{ content }}
-
-{% include footer.html %} 
-
-<script>$(function () {
-  $('[]').tooltip()
-})
-</script>
-
+  {% include foot.html %}
 </body>
 
 </html>
