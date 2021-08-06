@@ -106,18 +106,24 @@ showToc = function () {
     document.getElementById(this.options.targetId).appendChild(this.toc);
   }
   var self = this;
+  //先生成一个
+
+  var curr_view_po = self.tocTop - document.documentElement.scrollTop + 10;
+  var curr_view_posi = curr_view_po > 10 ? curr_view_po : 10;
+  self.toc.style['position'] = 'fixed';
+  self.toc.style['left']  = '10px';
+
   if (this.tocTop > -1) {
     window.onscroll = function () {
       var curr_view_po = self.tocTop - document.documentElement.scrollTop + 10;
       var curr_view_posi = curr_view_po > 10 ? curr_view_po : 10;
-      self.toc.style['position'] = 'fixed';
-      self.toc.style['left']  = '10px';
       self.toc.style['top'] = curr_view_posi +'px'; // 后面要用 style
-      chopong_showSubToc();
-      chopong_scrollprogress();
+             chopong_showSubToc();
+             chopong_scrollprogress();
     };
   }
 };
+
 chopong_showSubToc = function () {
   var isShow = document.querySelector('#navbar-toc').style['display'];
   if( isShow == 'none') return;

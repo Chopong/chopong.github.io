@@ -46,10 +46,23 @@
 <script src="{{ '/plugins/highlight/highlight.min.js' | prepend: site.baseurl | prepend: site.url }}"></script>
 <script src="{{ '/plugins/highlight/highlightjs-line-numbers.min.js' | prepend: site.baseurl | prepend: site.url }}"></script>
 <script>
-  hljs.highlightAll();
-  hljs.initLineNumbersOnLoad();
-  hljs.configure({ ignoreUnescapedHTML: true })
+ hljs.highlightAll();
+ hljs.initLineNumbersOnLoad({singleLine: true});
+ hljs.configure({ ignoreUnescapedHTML: true })
 </script>
+<!-- CSS选择器
+     渲染后，您可能需要选择一些代码行。例如，您可能希望通过更改用户的背景色来突出显示由用户选择的一系列行。下面的CSS选择器可用于执行这些选择操作。
+     CSS选择器	描述
+     .hljs-ln-line	选择所有行，包括行号
+     .hljs-ln-numbers	选择所有行号，不包括代码行
+     .hljs-ln-code	选择所有代码行，但行号除外
+     .hljs-ln-line[data-line-number="i"]	选择第i行，包括行号
+     .hljs-ln-numbers[data-line-number="i"]	选择第i行号，不包括代码行
+     .hljs-ln-code[data-line-number="i"]	选择第i行代码，不包括行号
+-->
+
+
+
 
 <!-- Custom search plugin  -->
  <script src="{{ '/plugins/search/bootstrap-typeahead.js' | prepend: site.baseurl | prepend: site.url }}"></script>

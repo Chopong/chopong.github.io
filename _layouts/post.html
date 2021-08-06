@@ -1,85 +1,87 @@
 <!DOCTYPE html>
 <html>
 
-{% include head.html %}
+    {% include head.html %}
 
-<body data-spy="scroll" data-target="#navbar-toc" data-offset="0" style="position: relative;">
-  <!-- onselectstart="return false"-->
-  {% include nav.html %}
+    <body data-spy="scroll" data-target="#navbar-toc" data-offset="0" style="position: relative;">
+        <!-- onselectstart="return false"-->
+        {% include nav.html %}
 
-<!-- Post Header -->
-<header class="intro-header" id="intro_bac" style="background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}');">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
-        <div class="post-heading" style="padding: 30px 0">
-          <h1>{{ page.title }}</h1>
-          {% if page.subtitle %}
-          <h2 class="subheading">{{ page.subtitle }}</h2>
-          {% endif %}
-          <span class="meta">Posted by {{ page.author }} on {{ page.date | date: "%B %-d, %Y" }}</span>
+        <!-- Post Header -->
+        <header class="intro-header" id="intro_bac" style="background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}');">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+                        <div class="post-heading" style="padding: 30px 0">
+                            <h1>{{ page.title }}</h1>
+                            {% if page.subtitle %}
+                            <h2 class="subheading">{{ page.subtitle }}</h2>
+                            {% endif %}
+                            <span class="meta">Posted by {{ page.author }} on {{ page.date | date: "%B %-d, %Y" }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Post Content -->
+        {% include imagezoom.html %}
+
+        <article>
+            <div id="content" class="container">
+                <div class="row">
+                    <div id="Chopong_TOC" class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+
+
+                        {{ content }}
+
+                        <div class="d-flex">
+                            {% if page.previous.url %}
+                            <div class="mr-auto p-2 previous cp_btn">
+                                <a href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}"
+                                   data-placement="top" title="{{page.previous.title}}">&larr; Previous Post</a>
+                            </div>
+                            {% endif %}
+                            {% if page.next.url %}
+                            <div class="ml-auto p-2 next cp_btn">
+                                <a href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}" data-placement="top" title="{{page.next.title}}">Next Post &rarr;</a>
+                            </div>
+                            {% endif %}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <aside id="Chopong_TOC_Position"></aside>
+
+        <div class="toc_button"  onclick="toc_toggle('navbar-toc')">
+            <i class="fa fa-bars fa-2x"></i>
         </div>
-      </div>
-    </div>
-  </div>
-</header>
-
-<!-- Post Content -->
-{% include imagezoom.html %}
-
-<article>
-  <div id="content" class="container">
-    <div class="row">
-      <div id="Chopong_TOC" class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
-          {{ content | markdownify }}
-        <ul class="pager">
-          {% if page.previous.url %}
-          <li class="previous">
-            <a href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}"
-              data-placement="top" title="{{page.previous.title}}">&larr; Previous Post</a>
-          </li>
-          {% endif %}
-          {% if page.next.url %}
-          <li class="next">
-            <a href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}" data-placement="top" title="{{page.next.title}}">Next Post &rarr;</a>
-          </li>
-          {% endif %}
-        </ul>
-      </div>
-    </div>
-  </div>
-</article>
-
-<aside id="Chopong_TOC_Position"></aside>
-
-<div class="toc_button"  onclick="toc_toggle('navbar-toc')">
-  <i class="fa fa-bars fa-2x"></i>
-</div>
-<div>
-  <a id="back_to_top" data-placement="top" title="返回顶部" href="#top">
-    <i class="fa fa-arrow-up fa-2x"></i>
-  </a>
-</div>
+        <div>
+            <a id="back_to_top" data-placement="top" title="返回顶部" href="#top">
+                <i class="fa fa-arrow-up fa-2x"></i>
+            </a>
+        </div>
 
 
 
-{% include foot.html %}
+        {% include foot.html %}
 
-<script type="text/javascript">
-  chopong_Toc('Chopong_TOC', {
-    'level': 6,
-    'targetId': 'Chopong_TOC_Position'
-  });
-</script>
+        <script type="text/javascript">
+         chopong_Toc('Chopong_TOC', {
+             'level': 6,
+             'targetId': 'Chopong_TOC_Position'
+         });
+
+        </script>
 
 
-{% include comments.html %}
+        {% include comments.html %}
 
-{% include footer.html %}
+        {% include footer.html %}
 
-</body>
+    </body>
 
 </html>
-
-
-

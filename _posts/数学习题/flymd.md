@@ -1,23 +1,28 @@
 ---
 layout: post
-title: 解析结合
-subtitle: 看报
+title: 解析几何
+subtitle: 解析几何的基础
 author: Chopong
-tags: post note org emacs
-date: 2021-04-25 19:53:13
+tags: 解析几何 线性空间
+date: 2021-07-01 19:53:13
 email: weisp.pku@gmail.com
 categories: 数学习题
 ---
-# Table of Contents #
 
-{:toc}
+# 解析几何 #
 
-# 2021-07-22-Org读书与看报 #
 
-Date: 2021-07-22,四,11:38:39
-Author: Wei Shaopeng
-Email: Chopong@qq.com
+## 第一节 ##
 
+数学公式的建立
+
+$$ x_1^2 $$
+
+sfds
+
+$$
+
+$$ x_{1}^{22} $$
 
 ## 安装插件 ##
 
@@ -25,8 +30,12 @@ Email: Chopong@qq.com
 
 org-ref是一个在org-mode中智能插入参考文献的包，可以用如下命令安装org-ref插件：
 
+```lisp
 M-x package-install org-ref
+```
 
 ### 1.2 Citeproc-org的安装 ###
 
-核桃仁申达股份使得
+
+fLyMd-mAkEr
+
